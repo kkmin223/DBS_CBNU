@@ -5,10 +5,11 @@ const mysql = require("mysql");
 const host = "localhost";
 
 let connection = mysql.createConnection({
-    host     : 'localhost',
+    host     :  host,
     user     : 'root',
-    password : '7233',      //각자 비밀번호 사용
-    database : 'dbs_project'
+    password : '1234',      //각자 비밀번호 사용
+    database : 'dbs_project',
+    port : '3305'
   });
 
   connection.connect();
