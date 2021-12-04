@@ -1,2 +1,2 @@
 node_modules
-./DB/index.js
+./src/DB/index.js
