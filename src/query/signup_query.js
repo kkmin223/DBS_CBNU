@@ -1,0 +1,2 @@
+exports.add_user = `INSERT INTO user (id, password, name, birthdate, email, phone, city, ku, dong,manager_id) VALUES (?,?,?,?,?,?,?,?,?,?)` // User 회원가입
+exports.add_company = `INSERT INTO company (id, password, name, homepage, phone, city, ku, dong, manager_id) VALUES (?,?,?,?,?,?,?,?,?)` // Company 회원가입

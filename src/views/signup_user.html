@@ -102,40 +102,40 @@
                 <div class="row">
                     <div class="col-12 col-lg-8">
                         <div class="login_details_area mt-50 clearfix">
-
-                            <div class="login">
+                            <div class="login-title">
                                 <h2>Sign Up</h2>
                             </div>
+
                             <a href="/signup_company" type="button" class="btn btn-warning text-white">Sign Up for Company</a>
 
-                            <form action="#" method="post">
+                            <form action="/signup_user" method="post">
                                 <div class="row">
                                     <div class="col-12 mb-3">
                                     </br><label>ID</label>
-                                        <input type="text" class="form-control" id="id" value="" placeholder="ID" required>
+                                        <input type="text" class="form-control" name="id" id="id" value="" placeholder="ID" required>
                                     </div>
                                     <!--<div class="col-md-6 mb-3">
                                         <input type="text" class="form-control" id="last_name" value="" placeholder="Last Name" required>
                                     </div> -->
                                     <div class="col-12 mb-3">
                                         <label>Password</label>
-                                        <input type="text" class="form-control" id="password" placeholder="Password" value="">
+                                        <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label>Name</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Name" value="">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label>Birthdate</label>
-                                        <input type="date" class="form-control" id="birthdate" placeholder="Birthdate(YY-MM-DD)" value="">
+                                        <input type="date" class="form-control" name="birthdate" id="birthdate" placeholder="Birthdate(YY-MM-DD)" value="">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Email" value="">
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Phone Number</label>
-                                        <input type="text" class="form-control" id="phone" min="0" placeholder="Phone No" value="">
+                                        <input type="text" class="form-control" name="phone" id="phone" min="0" placeholder="Phone No" value="">
                                     </div>
                                     <!--<div class="col-12 mb-3">
                                         <select class="w-100" id="country">
@@ -152,15 +152,17 @@
                                     <div class="col-12">
                                         <label>Address</label>
                                     </div>
-                                    
                                     <div class="col-4">
-                                        <input type="text" class="form-control" id="city" value="" placeholder="City" required>
+                                        <input type="text" class="form-control" name="city" id="city" value="" placeholder="City" required>
                                     </div>
                                     <div class="col-4">
-                                        <input type="text" class="form-control" id="ku" value="" placeholder="Ku" required>
+                                        <input type="text" class="form-control" name="ku" id="ku" value="" placeholder="Ku" required>
                                     </div>
                                     <div class="col-4">
-                                        <input type="text" class="form-control" id="dong" value="" placeholder="Dong" required>
+                                        <input type="text" class="form-control" name="dong" id="dong" value="" placeholder="Dong" required>
+                                    </div>
+                                    <div class="amado-btn mt-3 ml-3">
+                                        <input type="submit" value="Create account" class="btn amado-btn">            
                                     </div>
                                 </div>
                             </form>

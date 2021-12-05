@@ -107,34 +107,30 @@
                                 <h2>Sign Up for company</h2>
                             </div>
 
-                            <form action="#" method="post">
+                            <form action="/signup_company" method="post">   <!-- 입력범위를 감싸는 형식에 form action ="#" method = "post 를 써준다."-->
                                 <div class="row">
                                     <div class="col-12 mb-3">
                                     </br><label>Company ID</label>
-                                        <input type="text" class="form-control" id="id" value="" placeholder="ID" required>
+                                        <input type="text" class="form-control" name="id" id="id" value="" placeholder="ID" required>   <!--입력받을 때, name=""으로 가리키는 값의 입력값을 받는다.-->
                                     </div>
                                     <!--<div class="col-md-6 mb-3">
                                         <input type="text" class="form-control" id="last_name" value="" placeholder="Last Name" required>
                                     </div> -->
                                     <div class="col-12 mb-3">
                                         <label>Company Password</label>
-                                        <input type="text" class="form-control" id="password" placeholder="Password" value="">
+                                        <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label>Company Name</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Name" value="">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="">
                                     </div>
                                     <div class="col-12 mb-3">
                                         <label>Homepage</label>
-                                        <input type="text" class="form-control" id="homepage" placeholder="Homepage" value="">
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label>Company Email</label>
-                                        <input type="email" class="form-control" id="email" placeholder="Email" value="">
+                                        <input type="text" class="form-control" name="homepage" id="homepage" placeholder="Homepage" value="">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Company Phone Number</label>
-                                        <input type="text" class="form-control" id="phone" min="0" placeholder="Phone No" value="">
+                                        <input type="text" class="form-control" name="phone" id="phone" min="0" placeholder="Phone No" value="">
                                     </div>
                                     <!--<div class="col-12 mb-3">
                                         <select class="w-100" id="country">
@@ -153,13 +149,16 @@
                                     </div>
                                     
                                     <div class="col-4">
-                                        <input type="text" class="form-control" id="city" value="" placeholder="City" required>
+                                        <input type="text" class="form-control" name="city" id="city" value="" placeholder="City" required>
                                     </div>
                                     <div class="col-4">
-                                        <input type="text" class="form-control" id="ku" value="" placeholder="Ku" required>
+                                        <input type="text" class="form-control" name="ku" id="ku" value="" placeholder="Ku" required>
                                     </div>
                                     <div class="col-4">
-                                        <input type="text" class="form-control" id="dong" value="" placeholder="Dong" required>
+                                        <input type="text" class="form-control" name="dong" id="dong" value="" placeholder="Dong" required>
+                                    </div>
+                                    <div class="amado-btn mt-3 ml-3">
+                                        <input type="submit" value="Create account" class="btn amado-btn">            
                                     </div>
                                 </div>
                             </form>

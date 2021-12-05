@@ -28,7 +28,7 @@ create table User(	-- 2nd
 create table Company(	-- 3rd
 	id			varchar(45)	NOT NULL,	-- primary key
     name		varchar(45)	NOT NULL,
-    passowrd	varchar(45)	NOT NULL,
+    password	varchar(45)	NOT NULL,
     phone		varchar(45)	NOT NULL,	-- 회사 전화 번호
     city		varchar(45),
     ku			varchar(45),
