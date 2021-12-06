@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+exports.HTML = ( )=>{
+    return `
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -48,7 +50,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="/"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -67,16 +69,16 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="/"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                    <li class="active"><a href="login.html">Login</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/shop">Shop</a></li>
+                    <li><a href="/product-details">Product</a></li>
+                    <li><a href="/cart">Cart</a></li>
+                    <li class="active"><a href="/login">Login</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->
@@ -110,13 +112,19 @@
                                     <h2>Login</h2></br>
                                 </div>
 
-                                <div class = "col-12">    
-                                    <input type="radio" name="chk_info" value="iamUser" checked="checked">User  
-                                    &nbsp; &nbsp;
-                                    <input type="radio" name="chk_info" value="iamCompany" >Company 
-                                    &nbsp; &nbsp;
-                                    <input type="radio" name="chk_info" value="iamManager">Manager  
-                                </div>    
+                                <div class = "col-12 mb-3">   
+                                    <form action="/login_user" style="width:10;float:left">
+                                        <input type="submit" name="chk_info" value="User" checked="checked">
+                                        &nbsp; &nbsp;
+                                    </form>
+                                    <form action="/login_company" style="width:10;float:left">
+                                        <input type="submit" name="chk_info" value="Company" >
+                                        &nbsp; &nbsp;
+                                    </form>    
+                                    <form action="/login_manager" style="width:10;float:left">
+                                        <input type="submit" name="chk_info" value="Manager">
+                                    </form>    
+                                </div></br>    
 
                                 <form action="/login_user" method="post">
                                         <div class="col-6 mb-3" >
@@ -127,17 +135,10 @@
                                         </div>
 
                                         <label>
-                                            <div class="amado-btn-group ml-3">
+                                            <div class="amado-btn-group col-12 ml-3">
                                                 <button type="submit" class="btn amado-btn">Login</button>        
                                             </div>
                                         </label>
-                                        <label>
-                                            &nbsp;
-                                            <div class="amado-btn-group ml-1">
-                                            <a href="/signup_user" class="btn amado-btn">Sign Up</a>
-                                            </div>
-                                        </labe>  
-                                        
                                 </form>   
                         </div>
                     </div>
@@ -182,7 +183,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="/"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -200,19 +201,19 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home</a>
+                                            <a class="nav-link" href="/">Home</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="shop.html">Shop</a>
+                                            <a class="nav-link" href="/shop">Shop</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="product-details.html">Product</a>
+                                            <a class="nav-link" href="/product-details">Product</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="cart.html">Cart</a>
+                                            <a class="nav-link" href="/cart">Cart</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="login.html">Login</a>
+                                            <a class="nav-link" href="/login">Login</a>
                                         </li>
 
                                     </ul>
@@ -239,4 +240,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 </body>
 
-</html>
+</html>`
+}

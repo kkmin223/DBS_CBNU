@@ -107,3 +107,6 @@ create table Language(	-- 9th
 	CONSTRAINT FK_Language_Company FOREIGN KEY (company_id) REFERENCES Company(id),
 	CONSTRAINT FK_Language_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name)
 );
+
+ALTER TABLE game  -- 승인 여부 추가
+ADD approval BOOLEAN DEFAULT FALSE NOT NULL;

@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+exports.HTML = ( )=>{
+    return `
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,7 +11,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Home</title>
+    <title>DBS_projct | Login</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -48,7 +50,7 @@
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="/"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -57,6 +59,9 @@
         </div>
 
         <!-- Header Area Start -->
+        <script>
+            var login_menu = "Login";
+        </script>
         <header class="header-area clearfix">
             <!-- Close Icon -->
             <div class="nav-close">
@@ -64,16 +69,16 @@
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="/"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li class="active"><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="shop.html">Shop</a></li>
                     <li><a href="product-details.html">Product</a></li>
                     <li><a href="cart.html">Cart</a></li>
-                    <li><a href="login.html">Login</a></li>
+                    <li class="active"><a href="/">Login</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->
@@ -97,129 +102,56 @@
         </header>
         <!-- Header Area End -->
 
-        <!-- Product Catagories Area Start -->
-        <div class="products-catagories-area clearfix">
-            <div class="amado-pro-catagory clearfix">
+        <div class="cart-table-area section-padding-100">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <div class="login_details_area mt-50 clearfix">
 
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="img/bg-img/1.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Modern Chair</h4>
-                        </div>
-                    </a>
-                </div>
+                                <div class = "col-4">
+                                    <h2>Login</h2></br>
+                                </div>
 
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="img/bg-img/2.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Minimalistic Plant Pot</h4>
-                        </div>
-                    </a>
-                </div>
+                                <div class = "col-12 mb-3">   
+                                    <form action="/login_user" style="width:10;float:left">
+                                        <input type="submit" name="chk_info" value="User" checked="checked">
+                                        &nbsp; &nbsp;
+                                    </form>
+                                    <form action="/login_company" style="width:10;float:left">
+                                        <input type="submit" name="chk_info" value="Company" >
+                                        &nbsp; &nbsp;
+                                    </form>    
+                                    <form action="/login_manager" style="width:10;float:left">
+                                        <input type="submit" name="chk_info" value="Manager">
+                                    </form>    
+                                </div></br>    
 
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="img/bg-img/3.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Modern Chair</h4>
-                        </div>
-                    </a>
-                </div>
+                                <form action="/login_company" method="post">
+                                        <div class="col-6 mb-3" >
+                                            <input type="text" style="width:330px" class="form-control" id="id" name="id" placeholder="ID" required>
+                                        </div>
+                                        <div class="col-6 ">
+                                            <input type="text" style="width:330px" class="form-control" id="password" name="password" placeholder="Password" >
+                                        </div>
 
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="img/bg-img/4.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $180</p>
-                            <h4>Night Stand</h4>
+                                        <label>
+                                            <div class="amado-btn-group ml-3">
+                                                <button type="submit" class="btn amado-btn">Login</button>        
+                                            </div>
+                                        </label>
+                                        <label>
+                                            &nbsp;
+                                            <div class="amado-btn-group ml-1">
+                                            <a href="/signup_company" class="btn amado-btn">Sign Up</a>
+                                            </div>
+                                        </labe>  
+                                </form>   
                         </div>
-                    </a>
-                </div>
+                    </div>
 
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="img/bg-img/5.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $18</p>
-                            <h4>Plant Pot</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="img/bg-img/6.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $320</p>
-                            <h4>Small Table</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="img/bg-img/7.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $318</p>
-                            <h4>Metallic Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="img/bg-img/8.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $318</p>
-                            <h4>Modern Rocking Chair</h4>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Single Catagory -->
-                <div class="single-products-catagory clearfix">
-                    <a href="shop.html">
-                        <img src="img/bg-img/9.jpg" alt="">
-                        <!-- Hover Content -->
-                        <div class="hover-content">
-                            <div class="line"></div>
-                            <p>From $318</p>
-                            <h4>Home Deco</h4>
-                        </div>
-                    </a>
                 </div>
             </div>
         </div>
-        <!-- Product Catagories Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
@@ -257,7 +189,7 @@
                     <div class="single_widget_area">
                         <!-- Logo -->
                         <div class="footer-logo mr-50">
-                            <a href="index.html"><img src="img/core-img/logo2.png" alt=""></a>
+                            <a href="/"><img src="img/core-img/logo2.png" alt=""></a>
                         </div>
                         <!-- Copywrite Text -->
                         <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -275,7 +207,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                 <div class="collapse navbar-collapse" id="footerNavContent">
                                     <ul class="navbar-nav ml-auto">
                                         <li class="nav-item active">
-                                            <a class="nav-link" href="index.html">Home</a>
+                                            <a class="nav-link" href="/">Home</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="shop.html">Shop</a>
@@ -287,8 +219,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                             <a class="nav-link" href="cart.html">Cart</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="login.html">Login</a>
+                                            <a class="nav-link" href="/">Login</a>
                                         </li>
+
                                     </ul>
                                 </div>
                             </nav>
@@ -313,4 +246,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 </body>
 
-</html>
+</html>`
+}

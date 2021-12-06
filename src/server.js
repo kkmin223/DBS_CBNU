@@ -2,6 +2,7 @@ var express = require('express');       //nodejs express 사용
 const mysql = require('mysql');
 var app = express();
 var router = require('./router/main')     //라우터 폴더의 main.js에서 루트들 관리
+var game_router = require('./router/game_router')
 const db = require("./DB/index.js");
 const signup_router = require('./router/signup_router');   //같은 목적의 router들을 포함하는 새로운 router.js가 생성될 때마다 추가필요. 
 const bodyParser = require('body-parser')
@@ -18,3 +19,4 @@ app.use(express.static('views'));       //CSS, font, image, js, scss 등등 동�
 app.use(bodyParser.urlencoded({extended:false})) //req.body를 사용하기 위한 모듈
 app.use(router)
 app.use(signup_router)  //같은 목적의 router들을 포함하는 새로운 router.js가 생성될 때마다 추가필요. 
+app.use(game_router)
