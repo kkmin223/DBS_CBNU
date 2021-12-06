@@ -1,4 +1,4 @@
-exports.HTML = () => {
+exports.HTML = (game_detail) => {
     return `
     <!DOCTYPE html>
 <html lang="en">
@@ -9,8 +9,9 @@ exports.HTML = () => {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Checkout</title>
+    <title>Amado - Furniture Ecommerce Template | Product Details</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -72,9 +73,9 @@ exports.HTML = () => {
                 <ul>
                     <li><a href="index.html">Home</a></li>
                     <li><a href="shop.html">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
+                    <li class="active"><a href="product-details.html">Product</a></li>
                     <li><a href="cart.html">Cart</a></li>
-                    <li class="active"><a href="checkout.html">Checkout</a></li>
+                    <li><a href="login.html">Login</a></li>
                 </ul>
             </nav>
             <!-- Button Group -->
@@ -93,111 +94,14 @@ exports.HTML = () => {
                 <a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                 <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>no
+                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
             </div>
         </header>
         <!-- Header Area End -->
 
-        <div class="cart-table-area section-padding-100">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 col-lg-8">
-                        <div class="checkout_details_area mt-50 clearfix">
-                            <div class="cart-title">
-                                <h2>Register Game</h2>
-                            </div>
-                            <form action="/regist_game" method="post">
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label>Game Image</label><br>
-                                        <input type="file" name="images" id="game_images" accept="image/*" multiple>
-                                    </div>
-                                    <div class="col-md-12 mb-3">
-                                        <label>Game Name</label>
-                                        <input type="text" class="form-control" name="name" id="game_name" value="" placeholder="Game Name" required>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label>Category</label>
-                                        <table width="100%">
-                                            <tr>
-                                                <td><input type="checkbox" name="category" value="Action">Action</input></td>
-                                                <td><input type="checkbox" name="category" value="Arcade">Arcade</input></td>
-                                                <td><input type="checkbox" name="category" value="Role Playing">Role Playing</input></td>
-                                            </tr>
-                                            <tr>
-                                                <td> <input type="checkbox" name="category" value="Adventure">Adventure</input></td>
-                                                <td> <input type="checkbox" name="category" value="Casual">Casual</input></td>
-                                                <td><input type="checkbox" name="category" value="Horror">Horror</input></td>
-                                            </tr>
-                                            <tr>
-                                                <td> <input type="checkbox" name="category" value="Indie">Indie</input></td>
-                                                <td><input type="checkbox" name="category" value="MMO">MMO</input></td>
-                                                <td><input type="checkbox" name="category" value="Simulation">Simulation</input></td>
-                                            </tr>
-                                            <tr>
-                                                <td> <input type="checkbox" name="category" value="Strategy">Strategy</input></td>
-                                                <td><input type="checkbox" name="category" value="FPS">FPS</input></td>
-                                                <td><input type="checkbox" name="category" value="Sports">Sports</input></td>
-                                            </tr>
-                                        </table> 
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label>Language</label>
-                                        <table width="100%">
-                                            <tr>
-                                                <td> <input type="checkbox" name="language" value="korean">Korean</input></td>
-                                                <td> <input type="checkbox" name="language" value="english">English</input></td>
-                                            </tr>
-                                            <tr>
-                                                <td> <input type="checkbox" name="language" value="chinese">Chinese</input></td>
-                                                <td>  <input type="checkbox" name="language" value="japanese">Japanese</input></td>
-
-                                            </tr>
-                                            <tr>
-                                                <td>  <input type="checkbox" name="language" value="french">French</input></td>
-                                                <td> <input type="checkbox" name="language" value="german">German</input></td>
-                                            </tr>
-                                        </table>    
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                    </div>
-                                    <div class="col-6 mb-3">
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label>Release Date</label>
-                                        <input type="date" class="form-control" name="release_date" id="release_date" value="2021-12-05" required>
-                                    </div>
-                                    <div class="col-4 mb-3">
-                                        <label>Price</label>
-                                        <input type="text" class="form-control"  name="price" id="price" placeholder="Price" value=""> 
-                                    </div>
-                                    <div class="col-4 mb-3">
-                                        <label>Rating</label>
-                                        <select class="w-100" name="rating" id="rating">
-                                        <option value="R">전체 이용가</option>
-                                        <option value="12">12세 이상 이용가능</option>
-                                        <option value="15">15세 이상 이용가능</option>
-                                        <option value="19">19세 이상 이용가능</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label>System Requirements</label>
-                                        <textarea name="system_requirements" class="form-control w-100" id="system_requirements" cols="30" rows="5" placeholder="Leave a system requirements about your game"></textarea>
-                                    </div>
-                                    <div class="col-12 mb-3">
-                                        <label>Description</label>
-                                        <textarea name="description" class="form-control w-100" id="description" cols="30" rows="10" placeholder="Leave a description about your game"></textarea>
-                                    </div>
-                                    <div class="cart-btn mt-100">
-                                        <input type="submit" value="Register" class="btn amado-btn">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Product Details Area Start -->
+            ${game_detail}
+        <!-- Product Details Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
@@ -265,7 +169,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                             <a class="nav-link" href="cart.html">Cart</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="checkout.html">Checkout</a>
+                                            <a class="nav-link" href="login.html">Login</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -293,4 +197,128 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 </html>
     `
+}
+
+exports.game_detail = (game, category, language) =>{
+    return `
+    <div class="single-product-area section-padding-100 clearfix">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-50">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="/approve_list">List</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">${game[0].name}</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-7">
+                <div class="single_product_thumb">
+                    <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pro-big-1.jpg);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pro-big-2.jpg);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pro-big-3.jpg);">
+                            </li>
+                            <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pro-big-4.jpg);">
+                            </li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <a class="gallery_img" href="img/product-img/pro-big-1.jpg">
+                                    <img class="d-block w-100" src="img/product-img/pro-big-1.jpg" alt="First slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="img/product-img/pro-big-2.jpg">
+                                    <img class="d-block w-100" src="img/product-img/pro-big-2.jpg" alt="Second slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="img/product-img/pro-big-3.jpg">
+                                    <img class="d-block w-100" src="img/product-img/pro-big-3.jpg" alt="Third slide">
+                                </a>
+                            </div>
+                            <div class="carousel-item">
+                                <a class="gallery_img" href="img/product-img/pro-big-4.jpg">
+                                    <img class="d-block w-100" src="img/product-img/pro-big-4.jpg" alt="Fourth slide">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-5">
+                <div class="single_product_desc">
+                    <!-- Product Meta Data -->
+                    <div class="product-meta-data">
+                        <div class="line"></div>
+                            <p class="product-price">${game[0].price} ￦</p>
+                            <h6>${game[0].name}</h6>
+                            
+                    <!-- Ratings & Review -->
+                    <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+                        <div class="ratings">
+                            Rating : ${game[0].rating}
+                        </div>
+                    </div>
+                    <div class="release_date">
+                            Release Date : ${game[0].release_date}
+                        </div>
+                    <div class="mb-15 d-flex">
+                        <div class="category">
+                            Category
+                                ${category}
+                                <li>Action</li>
+                                <li>FPS</li>
+                        </div>
+                        <div class="language ml-5">
+                            Language
+                                ${language}
+                        </div>
+                    </div>
+                    <div class="system_requirements mb-15  align-items-center">
+                        System Requirements
+                        <ol>${game[0].system_requirements}</ol>
+                    </div>
+                </div>
+                
+                <div class="short_overview my-5">
+                    Description
+                    <p>${game[0].description}</p>
+                </div>
+                <!-- Add to Cart Form -->
+                <form class="cart clearfix" action="approve_game" method="post">
+                <input type="text" style="display:none;" class="form-control" name="name" id="game_name" value="${game[0].name}" placeholder="Game Name" readonly>
+                <input type="text" style="display:none;" class="form-control" name="company_id" id="company_id" value="${game[0].company_id}" placeholder="Game Name" readonly>
+                <button type="submit" name="addtocart" value="5" class="btn amado-btn">APPROVE</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    `
+}
+
+exports.category = (categories) => {
+    let result = ''
+    for(let i = 0; i< categories.length; i++){
+        result += `<li>${categories[i].category}</li>`
+    }
+    return result;
+}
+
+exports.language = (languages) => {
+    let result = ''
+    for(let i = 0; i< languages.length; i++){
+        result += `<li>${languages[i].language}</li>`
+    }
+    return result;
 }
