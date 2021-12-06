@@ -110,3 +110,6 @@ create table Language(	-- 9th
 
 ALTER TABLE game  -- 승인 여부 추가
 ADD approval BOOLEAN DEFAULT FALSE NOT NULL;
+
+ -- 이미지 칼럼 추가
+ALTER TABLE game ADD img mediumblob;
