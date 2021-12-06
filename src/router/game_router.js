@@ -13,7 +13,6 @@ router.get('/regist_game', (req,res)=>{
     let html = regist_game_view.HTML();
     res.end(html)
 });
-
 router.post('/regist_game', (req,res)=> {
     let data = req.body;
     console.log(req.body);
@@ -46,7 +45,7 @@ router.post('/regist_game', (req,res)=> {
         `);
     }
  });   
- 
+
  router.get('/manage_game', (req,res)=>{
      try{
         db.query(`SELECT * FROM game WHERE company_id = ?`, ["게임회사1"],(err, games)=>{
