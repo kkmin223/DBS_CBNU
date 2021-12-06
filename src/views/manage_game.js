@@ -71,7 +71,7 @@ exports.HTML = (game_list, summary)=> {
                     <!-- Amado Nav -->
                     <nav class="amado-nav">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="/">Home</a></li>
                             <li><a href="shop.html">Shop</a></li>
                             <li><a href="product-details.html">Product</a></li>
                             <li class="active"><a href="cart.html">Cart</a></li>
@@ -190,7 +190,7 @@ exports.HTML = (game_list, summary)=> {
                                         <div class="collapse navbar-collapse" id="footerNavContent">
                                             <ul class="navbar-nav ml-auto">
                                                 <li class="nav-item active">
-                                                    <a class="nav-link" href="index.html">Home</a>
+                                                    <a class="nav-link" href="/">Home</a>
                                                 </li>
                                                 <li class="nav-item">
                                                     <a class="nav-link" href="shop.html">Shop</a>

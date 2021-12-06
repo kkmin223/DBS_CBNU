@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+exports.HTML = ( )=>{
+    return `
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,7 +11,7 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title  -->
-    <title>Amado - Furniture Ecommerce Template | Product Details</title>
+    <title>DBS_projct | Login</title>
 
     <!-- Favicon  -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -57,6 +59,9 @@
         </div>
 
         <!-- Header Area Start -->
+        <script>
+            var login_menu = "Login";
+        </script>
         <header class="header-area clearfix">
             <!-- Close Icon -->
             <div class="nav-close">
@@ -70,11 +75,11 @@
             <nav class="amado-nav">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
-                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="/shop">Shop</a></li>
+                    <li><a href="/product-details">Product</a></li>
+                    <li><a href="/cart">Cart</a></li>
                     <li class="active"><a href="/login_user">Login</a></li>
-            </ul>
+                </ul>
             </nav>
             <!-- Button Group -->
             <div class="amado-btn-group mt-30 mb-100">
@@ -97,111 +102,54 @@
         </header>
         <!-- Header Area End -->
 
-        <!-- Product Details Area Start -->
-        <div class="single-product-area section-padding-100 clearfix">
+        <div class="cart-table-area section-padding-100">
             <div class="container-fluid">
-
                 <div class="row">
-                    <div class="col-12">
-                        <nav aria-label="breadcrumb"></nav>
-                            <ol class="breadcrumb mt-50">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                <li class="breadcrumb-item"><a href="#">Furniture</a></li>
-                                <li class="breadcrumb-item"><a href="#">Chairs</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">white modern chair</li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
+                    <div class="col-12 col-lg-8">
+                        <div class="login_details_area mt-50 clearfix">
 
-                <div class="row">
-                    <div class="col-12 col-lg-7">
-                        <div class="single_product_thumb">
-                            <div id="product_details_slider" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url(img/product-img/pro-big-1.jpg);">
-                                    </li>
-                                    <li data-target="#product_details_slider" data-slide-to="1" style="background-image: url(img/product-img/pro-big-2.jpg);">
-                                    </li>
-                                    <li data-target="#product_details_slider" data-slide-to="2" style="background-image: url(img/product-img/pro-big-3.jpg);">
-                                    </li>
-                                    <li data-target="#product_details_slider" data-slide-to="3" style="background-image: url(img/product-img/pro-big-4.jpg);">
-                                    </li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <a class="gallery_img" href="img/product-img/pro-big-1.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-1.jpg" alt="First slide">
-                                        </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-2.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-2.jpg" alt="Second slide">
-                                        </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-3.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-3.jpg" alt="Third slide">
-                                        </a>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <a class="gallery_img" href="img/product-img/pro-big-4.jpg">
-                                            <img class="d-block w-100" src="img/product-img/pro-big-4.jpg" alt="Fourth slide">
-                                        </a>
-                                    </div>
+                                <div class = "col-4">
+                                    <h2>Login</h2></br>
                                 </div>
-                            </div>
+
+                                <div class = "col-12 mb-3">   
+                                    <a href="/login_user" class="btn-warning">User</a>
+                                    <a href="/login_company" class="btn-warning">Company</a>
+                                    <a href="/login_manager" class="btn-warning">Manger</a>
+
+                                    <!--<form action="/login_user" style="width:10;float:left">
+                                        <input type="submit" name="chk_info" value="User" checked="checked">
+                                        &nbsp; &nbsp;
+                                    </form>
+                                    <form action="/login_company" style="width:10;float:left">
+                                        <input type="submit" name="chk_info" value="Company" >
+                                        &nbsp; &nbsp;
+                                    </form>    
+                                    <form action="/login_manager" style="width:10;float:left">
+                                        <input type="submit" name="chk_info" value="Manager">
+                                    </form> -->   
+                                </div></br>    
+
+                                <form action="/login_manager" method="post">
+                                        <div class="col-6 mb-3" >
+                                            <input type="text" style="width:330px" class="form-control" id="id" name="id" placeholder="ID" required>
+                                        </div>
+                                        <div class="col-6 ">
+                                            <input type="password" style="width:330px" class="form-control" id="password" name="password" placeholder="Password" >
+                                        </div>
+
+                                        <label>
+                                            <div class="amado-btn-group col-12 mt-3">
+                                                <button type="submit" class="btn amado-btn">Login</button>        
+                                            </div>
+                                        </label>
+                                </form>   
                         </div>
                     </div>
-                    <div class="col-12 col-lg-5">
-                        <div class="single_product_desc">
-                            <!-- Product Meta Data -->
-                            <div class="product-meta-data">
-                                <div class="line"></div>
-                                <p class="product-price">$180</p>
-                                <a href="product-details.html">
-                                    <h6>White Modern Chair</h6>
-                                </a>
-                                <!-- Ratings & Review -->
-                                <div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
-                                    <div class="ratings">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="review">
-                                        <a href="#">Write A Review</a>
-                                    </div>
-                                </div>
-                                <!-- Avaiable -->
-                                <p class="avaibility"><i class="fa fa-circle"></i> In Stock</p>
-                            </div>
 
-                            <div class="short_overview my-5">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid quae eveniet culpa officia quidem mollitia impedit iste asperiores nisi reprehenderit consequatur, autem, nostrum pariatur enim?</p>
-                            </div>
-
-                            <!-- Add to Cart Form -->
-                            <form class="cart clearfix" method="post">
-                                <div class="cart-btn d-flex mb-50">
-                                    <p>Qty</p>
-                                    <div class="quantity">
-                                        <span class="qty-minus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) effect.value--;return false;"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-                                        <input type="number" class="qty-text" id="qty" step="1" min="1" max="300" name="quantity" value="1">
-                                        <span class="qty-plus" onclick="var effect = document.getElementById('qty'); var qty = effect.value; if( !isNaN( qty )) effect.value++;return false;"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                                <button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
-                            </form>
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
-        <!-- Product Details Area End -->
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
@@ -260,17 +208,18 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                             <a class="nav-link" href="/">Home</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="shop.html">Shop</a>
+                                            <a class="nav-link" href="/shop">Shop</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="product-details.html">Product</a>
+                                            <a class="nav-link" href="/product-details">Product</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="cart.html">Cart</a>
+                                            <a class="nav-link" href="/cart">Cart</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="login.html">Login</a>
+                                            <a class="nav-link" href="/login_user">Login</a>
                                         </li>
+
                                     </ul>
                                 </div>
                             </nav>
@@ -295,4 +244,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 </body>
 
-</html>
+</html>`
+}

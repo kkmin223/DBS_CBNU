@@ -57,6 +57,9 @@
         </div>
 
         <!-- Header Area Start -->
+        <script>
+            var login_menu = "Login";
+        </script>
         <header class="header-area clearfix">
             <!-- Close Icon -->
             <div class="nav-close">
@@ -115,26 +118,23 @@
                                     <input type="radio" name="chk_info" value="iamManager">Manager  
                                 </div>    
 
-                                <form action="#" method="post">
+                                <form action="/login_user" method="post">
                                         <div class="col-6 mb-3" >
-                                            <input type="text" style="width:330px" class="form-control" id="id" value="" placeholder="ID" required>
+                                            <input type="text" style="width:330px" class="form-control" id="id" name="id" placeholder="ID" required>
                                         </div>
-                                        <!--<div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" id="last_name" value="" placeholder="Last Name" required>
-                                        </div> -->
                                         <div class="col-6 ">
-                                            <input type="text" style="width:330px" class="form-control" id="password" value="" placeholder="Password" >
+                                            <input type="text" style="width:330px" class="form-control" id="password" name="password" placeholder="Password" >
                                         </div>
 
                                         <label>
                                             <div class="amado-btn-group ml-3">
-                                            <a href="#" class="btn amado-btn">Login</a>
+                                                <button type="submit" class="btn amado-btn">Login</button>        
                                             </div>
                                         </label>
                                         <label>
                                             &nbsp;
-                                            <div class="amado-btn-group">
-                                            <a href="/signup_user" class="btn amado-btn">Create an account</a>
+                                            <div class="amado-btn-group ml-1">
+                                            <a href="/signup_user" class="btn amado-btn">Sign Up</a>
                                             </div>
                                         </labe>  
                                         
@@ -214,6 +214,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                         <li class="nav-item">
                                             <a class="nav-link" href="login.html">Login</a>
                                         </li>
+
                                     </ul>
                                 </div>
                             </nav>
