@@ -1,5 +1,9 @@
-exports.HTML = ()=>{
-    return `<!DOCTYPE html>
+const store = require('store')
+
+
+exports.HTML = ( )=>{
+    return `
+    <!DOCTYPE html>
     <html lang="en">
     
     <head>
@@ -10,7 +14,7 @@ exports.HTML = ()=>{
         <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     
         <!-- Title  -->
-        <title>DBS_projct | Signup</title>
+        <title>DBS_projct | Login</title>
     
         <!-- Favicon  -->
         <link rel="icon" href="img/core-img/favicon.ico">
@@ -58,6 +62,9 @@ exports.HTML = ()=>{
             </div>
     
             <!-- Header Area Start -->
+            <script>
+                var login_menu = "Login";
+            </script>
             <header class="header-area clearfix">
                 <!-- Close Icon -->
                 <div class="nav-close">
@@ -104,55 +111,19 @@ exports.HTML = ()=>{
                         <div class="col-12 col-lg-8">
                             <div class="login_details_area mt-50 clearfix">
     
-                                <div class="login">
-                                    <h2>Sign Up for company</h2>
-                                </div>
-    
-                                <form action="/signup_company" method="post">   <!-- 입력범위를 감싸는 형식에 form action ="#" method = "post 를 써준다."-->
-                                    <div class="row">
-                                        <div class="col-12 mb-3">
-                                        </br><label>Company ID</label>
-                                            <input type="text" class="form-control" name="id" id="id" value="" placeholder="ID" required>   <!--입력받을 때, name=""으로 가리키는 값의 입력값을 받는다.-->
-                                        </div>
-                                        <!--<div class="col-md-6 mb-3">
-                                            <input type="text" class="form-control" id="last_name" value="" placeholder="Last Name" required>
-                                        </div> -->
-                                        <div class="col-12 mb-3">
-                                            <label>Company Password</label>
-                                            <input type="text" class="form-control" name="password" id="password" placeholder="Password" required>
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <label>Company Name</label>
-                                            <input type="text" class="form-control" name="name" id="name" placeholder="Name" required>
-                                        </div>
-                                        <div class="col-12 mb-3">
-                                            <label>Homepage</label>
-                                            <input type="text" class="form-control" name="homepage" id="homepage" placeholder="Homepage" required>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label>Company Phone Number</label>
-                                            <input type="text" class="form-control" name="phone" id="phone" min="0" placeholder="Phone No" required>
-                                        </div>
-                                        <div class="col-12">
-                                            <label>Company Address</label>
-                                        </div>
-                                        
-                                        <div class="col-4">
-                                            <input type="text" class="form-control" name="city" id="city" value="" placeholder="City" >
-                                        </div>
-                                        <div class="col-4">
-                                            <input type="text" class="form-control" name="ku" id="ku" value="" placeholder="Ku" >
-                                        </div>
-                                        <div class="col-4">
-                                            <input type="text" class="form-control" name="dong" id="dong" value="" placeholder="Dong" >
-                                        </div>
-                                        <div class="amado-btn mt-3 ml-3">
-                                            <input type="submit" value="Create account" class="btn amado-btn">            
-                                        </div>
+                                    <div class = "col-4">
+                                        <h2>Success for Account creation!</h2></br>
+                                    </div>   
+                                        <label>
+                                            &nbsp;
+                                            <div class="amado-btn-group ml-1">
+                                            
+                                            <a href="/login_user" class="btn amado-btn">Back to Login page</a>
+                                            </div>
+                                        </labe>  
                                     </div>
-                                </form>
-                            </div>
                         </div>
+    
                     </div>
                 </div>
             </div>
@@ -223,8 +194,9 @@ exports.HTML = ()=>{
                                                 <a class="nav-link" href="cart.html">Cart</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="/login_user">Login</a>
+                                                <a class="nav-link" href="login.html">Login</a>
                                             </li>
+    
                                         </ul>
                                     </div>
                                 </nav>
@@ -249,5 +221,6 @@ exports.HTML = ()=>{
     
     </body>
     
-    </html>`
+    </html>
+    `
 }

@@ -77,11 +77,11 @@ exports.HTML = ( )=>{
                 <!-- Amado Nav -->
                 <nav class="amado-nav">
                     <ul>
-                        <li><a href="/index">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="shop.html">Shop</a></li>
                         <li><a href="product-details.html">Product</a></li>
                         <li><a href="cart.html">Cart</a></li>
-                        <li class="active"><a href="/login">Login</a></li>
+                        <li class="active"><a href="/login_user">Login</a></li>
                     </ul>
                 </nav>
                 <!-- Button Group -->
@@ -116,17 +116,9 @@ exports.HTML = ( )=>{
                                     </div>
     
                                     <div class = "col-12 mb-3">   
-                                        <form action="/login_user" style="width:10;float:left">
-                                            <input type="submit" name="chk_info" value="User" checked="checked">
-                                            &nbsp; &nbsp;
-                                        </form>
-                                        <form action="/login_company" style="width:10;float:left">
-                                            <input type="submit" name="chk_info" value="Company" >
-                                            &nbsp; &nbsp;
-                                        </form>    
-                                        <form action="/login_manager" style="width:10;float:left">
-                                            <input type="submit" name="chk_info" value="Manager">
-                                        </form>    
+                                        <button href="/login_user" class="btn-outline-warning">User</button>
+                                        <button href="/login_company" class="btn-outline-warning">Company</button>
+                                        <button href="/login_manager" class="btn-outline-warning">Manger</button>
                                     </div></br>    
     
                                     <form action="/login_user" method="post">
@@ -134,7 +126,7 @@ exports.HTML = ( )=>{
                                                 <input type="text" style="width:330px" class="form-control" id="id" name="id" placeholder="ID" required>
                                             </div>
                                             <div class="col-6 ">
-                                                <input type="text" style="width:330px" class="form-control" id="password" name="password" placeholder="Password" >
+                                                <input type="password" style="width:330px" class="form-control" id="password" name="password" placeholder="Password" >
                                             </div>
     
                                             <label>
@@ -223,7 +215,7 @@ exports.HTML = ( )=>{
                                                 <a class="nav-link" href="cart.html">Cart</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="login.html">Login</a>
+                                                <a class="nav-link" href="/login_user">Login</a>
                                             </li>
     
                                         </ul>

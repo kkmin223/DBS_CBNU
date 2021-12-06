@@ -12,7 +12,7 @@ router.get('/',function(req,res){
 router.get('/cart',function(req,res){
    res.render('cart.html');
 });
-router.get('/login',function(req,res){
+router.get('/login_user',function(req,res){
    let html = login_user_view.HTML()
    res.end(html)
 });

@@ -3,25 +3,42 @@ const express = require('express');
 const router = express.Router();
 const signup_query = require('../query/signup_query')   //여기서 사용되는 쿼리문을 참조한다.
 const path = require('path');
+const index_view = require('../views/index')
 
 const login_user_view = require('../views/login_user')
-const login_company_view = require('../views/login_user')
-const login_manager_view = require('../views/login_company')
+const login_company_view = require('../views/login_company')
+const login_manager_view = require('../views/login_manager')
+const login_fail_view = require('../views/login_fail')
 
 const signup_user_view = require('../views/signup_user')
 const signup_company_view = require('../views/signup_company')
+const signup_success_view = require('../views/signup_success')
 
 const store = require('store');
+
 store.set('key',{id:null, type:null})   //key의 기본값 세팅
 
 router.get('/logout',(req,res)=>{
-    store.remove("key")
+    store.set('key',{id:null, type:null})
+    let html = index_view.HTML();
+    res.end(html)
+})
+
+router.get('/login_fail',(req,res)=>{
+    let html = login_fail_view.HTML();
+    res.end(html)
+})
+
+router.get('/signup_success',(req,res)=>{
+    let html = signup_success_view.HTML();
+    res.end(html)
 })
 
 router.get('/login_user',(req,res)=>{
     let html = login_user_view.HTML();
     res.end(html)
 })
+
 
 router.post('/login_user', function(req,res){
     var userid = req.body['id'];
@@ -32,8 +49,7 @@ router.post('/login_user', function(req,res){
                 store.set('key',{id:userid,type:"user" })
                 res.redirect('/');
             }else{
-                res.redirect('/');
-                res.end(`alert(Account is not exist)`)             
+                res.redirect('/login_fail')
             }
         }else {
             res.end(`alert('Not found ${err.message}')`);
@@ -49,16 +65,15 @@ router.get('/login_company',(req,res)=>{
 })
 
 router.post('/login_company', function(req,res){
-    var companyid = req.body['id'];
-    var companypassword = req.body['password'];
-    db.query('select * from company where id=\'' + companyid + '\' and password=\'' + companypassword + '\'',function(err,rows,fields){
+    var coid = req.body['id'];
+    var copassword = req.body['password'];
+    db.query('select * from company where id=\'' + coid + '\' and password=\'' + copassword + '\'',function(err,rows,fields){
         if(!err){
              if(rows[0]!=undefined){ 
-                store.set('key',{id:companyid,type:"company" })
+                store.set('key',{id:coid,type:"company" })
                 res.redirect('/');
             }else{
-                res.redirect('/');
-                res.end(`alert(Account is not exist)`)             
+                res.redirect('/login_fail')
             }
         }else {
             res.end(`alert('Not found ${err.message}')`);
@@ -67,6 +82,7 @@ router.post('/login_company', function(req,res){
     })
  
 })
+
 
 router.get('/login_manager',(req,res)=>{
     let html = login_manager_view.HTML();
@@ -74,16 +90,15 @@ router.get('/login_manager',(req,res)=>{
 })
 
 router.post('/login_manager', function(req,res){
-    var managerid = req.body['id'];
-    var managerpassword = req.body['password'];
-    db.query('select * from company where id=\'' + managerid + '\' and password=\'' + managerpassword + '\'',function(err,rows,fields){
+    var maid = req.body['id'];
+    var mapassword = req.body['password'];
+    db.query('select * from manager where id=\'' + maid + '\' and password=\'' + mapassword + '\'',function(err,rows,fields){
         if(!err){
              if(rows[0]!=undefined){ 
-                store.set('key',{id:managerid,type:"manager" })
+                store.set('key',{id:maid,type:"manager" })
                 res.redirect('/');
             }else{
-                res.redirect('/');
-                res.end(`alert(Account is not exist)`)             
+                res.redirect('/login_fail')
             }
         }else {
             res.end(`alert('Not found ${err.message}')`);
@@ -92,7 +107,6 @@ router.post('/login_manager', function(req,res){
     })
  
 })
-
 
 
 router.get('/signup_user',(req,res) =>{
@@ -109,11 +123,11 @@ router.post('/signup_user', (req,res)=> {
             ,(err) => {
                 if (err) throw new Error(err);
             });           
-        res.redirect('/');
-        res.end(`alert(Success for Account creation!)`)
+            res.redirect('/signup_success')
+            //res.end(`alert(Success for Account creation!)`)
     } catch(err){
         res.writeHead(404);
-        res.end(`alert('Not found ${err.message}')`);
+        //res.end(`alert('Not found ${err.message}')`);
     }
    
  }); 
@@ -132,11 +146,11 @@ router.post('/signup_user', (req,res)=> {
             ,(err) => {
                 if (err) throw new Error(err);
             });           
-        res.redirect('/');
-        res.end(`alert(Success for Account creation)`)
+            res.redirect('/signup_success')
+            //res.end(`alert(Success for Account creation)`)
     } catch(err){
         res.writeHead(404);
-        res.end(`alert('Not found ${err.message}')`);
+        //res.end(`alert('Not found ${err.message}')`);
     }
    
  }); 

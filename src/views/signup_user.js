@@ -74,7 +74,7 @@ exports.HTML = ()=>{
                         <li><a href="shop.html">Shop</a></li>
                         <li><a href="product-details.html">Product</a></li>
                         <li><a href="cart.html">Cart</a></li>
-                        <li class="active"><a href="/login">Login</a></li>
+                        <li class="active"><a href="/login_user">Login</a></li>
                     </ul>
                 </nav>
                 <!-- Button Group -->
@@ -225,7 +225,7 @@ exports.HTML = ()=>{
                                                 <a class="nav-link" href="cart.html">Cart</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="/login">Login</a>
+                                                <a class="nav-link" href="/login_user">Login</a>
                                             </li>
                                         </ul>
                                     </div>
