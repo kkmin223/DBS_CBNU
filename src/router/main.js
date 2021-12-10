@@ -9,7 +9,8 @@ const cart_plus_view = require('../views/cartplus')
 const cart_purchase_view = require('../views/cartpurchase')
 const cart_remove_view = require('../views/cartremove')
 const login_user_view = require('../views/login_user')
-const user_game_detail = require('../views/user_game_detail')
+const user_game_detail_view = require('../views/user_game_detail')
+const shop_search_view = require('../views/shop_search')
 const url = require('url');
 const store = require('store');
 
@@ -23,7 +24,6 @@ router.get('/', (req,res)=>{
           res.end(html)
       });
   } catch(err) {
-
   }
 });
 
@@ -33,6 +33,26 @@ router.get('/shop', (req,res) =>{
           if(err) throw new Error(err);
           let game_list = shop_view.game_list(game)
           let html = shop_view.HTML(game_list)
+          res.end(html)
+      });
+   } catch(err) {
+   }
+});
+
+router.post('/shop', (req,res) =>{
+   const search = req.body;
+   res.redirect('/shop_search?search=' + search.search);
+});
+
+router.get('/shop_search', (req,res) =>{
+   const search = url.parse(req.url,true).query;
+   var query = "%" + search.search + "%"
+   console.log(query)
+   try{
+      db.query(`select * from game where name like ?`, [query], (err, game)=>{
+          if(err) throw new Error(err);
+          let game_list = shop_search_view.game_list(game)
+          let html = shop_search_view.HTML(game_list)
           res.end(html)
       });
    } catch(err) {
@@ -116,11 +136,11 @@ router.get('/user_game_detail', (req,res)=>{
                if(err) throw new Error(err)
                db.query(`SELECT language FROM language WHERE company_id=? AND game_name=?`,[company_id,game_name], (err,languages)=>{
                    if(err) throw new Error(err)
-                   let category = user_game_detail.category(categories)
-                   let language = user_game_detail.language(languages);
-                   let add_to_cart = user_game_detail.add_to_cart(game);
-                   let game_detail = user_game_detail.game_detail(game,category,language,add_to_cart)
-                   let html = user_game_detail.HTML(game_detail);
+                   let category = user_game_detail_view.category(categories)
+                   let language = user_game_detail_view.language(languages);
+                   let add_to_cart = user_game_detail_view.add_to_cart(game);
+                   let game_detail = user_game_detail_view.game_detail(game,category,language,add_to_cart)
+                   let html = user_game_detail_view.HTML(game_detail);
                    res.end(html)
                })
            })

@@ -34,7 +34,7 @@ exports.HTML = (game_list)=> {
                     <div class="row">
                         <div class="col-12">
                             <div class="search-content">
-                                <form action="/shop" method="post">
+                                <form action="#" method="get">
                                     <input type="search" name="search" id="search" placeholder="Type your keyword...">
                                     <button type="submit"><img src="img/core-img/search.png" alt=""></button>
                                 </form>
