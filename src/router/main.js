@@ -9,6 +9,7 @@ const cart_plus_view = require('../views/cartplus')
 const cart_purchase_view = require('../views/cartpurchase')
 const cart_remove_view = require('../views/cartremove')
 const login_user_view = require('../views/login_user')
+const user_game_detail = require('../views/user_game_detail')
 const url = require('url');
 const store = require('store');
 
@@ -105,6 +106,30 @@ router.get('/cartpurchase', (req,res) =>{
       res.redirect('/')
    }
 });
+
+router.get('/user_game_detail', (req,res)=>{
+   const {company_id, game_name} = url.parse(req.url,true).query;
+    try{
+       db.query(`SELECT * FROM game WHERE company_id=? AND name=?`,[company_id,game_name], (err,game)=>{
+           if(err) throw new Error(err)
+           db.query(`SELECT category FROM category WHERE company_id=? AND game_name=?`,[company_id,game_name], (err,categories)=>{
+               if(err) throw new Error(err)
+               db.query(`SELECT language FROM language WHERE company_id=? AND game_name=?`,[company_id,game_name], (err,languages)=>{
+                   if(err) throw new Error(err)
+                   let category = user_game_detail.category(categories)
+                   let language = user_game_detail.language(languages);
+                   let add_to_cart = user_game_detail.add_to_cart(game);
+                   let game_detail = user_game_detail.game_detail(game,category,language,add_to_cart)
+                   let html = user_game_detail.HTML(game_detail);
+                   res.end(html)
+               })
+           })
+       })
+       
+    } catch(err) {
+       res.send(err.message)
+    }
+})
 
 
 

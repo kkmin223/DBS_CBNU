@@ -281,7 +281,7 @@ exports.game_list = (games) => {
                 <div class="product-meta-data">
                     <div class="line"></div>
                     <p class="product-price">${games[i].price}</p>
-                    <a href="/approve_game_detail?company_id=${games[i].company_id}&game_name=${games[i].name}">
+                    <a href="/user_game_detail?company_id=${games[i].company_id}&game_name=${games[i].name}">
                         <h6>${games[i].name}</h6>
                     </a>
                 </div>

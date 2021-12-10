@@ -424,7 +424,7 @@ exports.game_list = (games) => {
         const image = buffer.toString('base64');
         game_list += `<tr>
     <div class="single-products-catagory clearfix">
-        <a href="/approve_game_detail?company_id=${games[i].company_id}&game_name=${games[i].name}">
+        <a href="/user_game_detail?company_id=${games[i].company_id}&game_name=${games[i].name}">
             <img src="data:image/png;base64,${image}" alt="">
             <!-- Hover Content -->
             <div class="hover-content">
