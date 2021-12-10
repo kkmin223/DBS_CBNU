@@ -7,9 +7,8 @@ const url = require('url');
 const fs = require('fs');
 const manage_game_view = require('../views/manage_game')
 const regist_game_view = require('../views/regist_game')
-const approve_game_view = require('../views/approve_list')
 const approve_game_detail_view = require('../views/approve_game_detail')
-const manage_user_view = require('../views/manage_user')
+const manager_view = require('../views/manager_page')
 const modify_game_view = require('../views/modify_game')
 
 const multer = require('multer');
@@ -105,23 +104,7 @@ router.get('/modify_game', (req,res)=>{
 })
 
 
-router.get('/manage_user', (req,res)=>{
-    try{
-        db.query(`SELECT * FROM user`, (err,users)=>{
-            if(err) throw new Error(err);
-            db.query(`SELECT * FROM company`, (err,companys)=>{
-                if(err) throw new Error(err);
-                let user_list = manage_user_view.user_list(users);
-                let company_list = manage_user_view.company_list(companys);
-                let html = manage_user_view.HTML(user_list,company_list);
-                res.end(html);
-            })
-        })
-    } catch(err) {
-        console.log(err)
-        res.send(err.message);
-    }
-});
+
 
 router.post('/update_game', (req,res)=>{
     let data = req.body;
@@ -154,12 +137,39 @@ router.post('/update_game', (req,res)=>{
     }
 })
 
+router.get('/manager', (req,res)=>{
+    try{
+        db.query(`SELECT * FROM user`, (err,users)=>{
+            if(err) throw new Error(err);
+            db.query(`SELECT * FROM company`, (err,companys)=>{
+                if(err) throw new Error(err);
+                db.query(`SELECT * FROM game WHERE approval = false`,(err, games)=>{
+                    if(err) throw new Error(err);
+                    let user_list = manager_view.user_list(users);
+                    let company_list = manager_view.company_list(companys);
+                    let game_list = manager_view.game_list(games);
+                    let user_summary = manager_view.user_summary(users,companys);
+                    let game_summary = manager_view.game_summary(games);
+                    let html = manager_view.HTML(user_list,company_list,game_list,user_summary, game_summary);
+                    res.end(html);
+                })
+            })
+        })
+    } catch(err) {
+        console.log(err)
+        res.send(err.message);
+    }
+})
+
+
 router.get('/user/del', (req,res)=>{
     const {id} = url.parse(req.url,true).query;
     try{
         db.query(`DELETE FROM user WHERE id = ${id}`, (err)=>{
             if(err) throw new Error(err);
+
         })
+        res.redirect('/manager');
     } catch(err){
         res.send(err.message);
     }
@@ -171,24 +181,9 @@ router.get('/company/del', (req,res)=>{
         db.query(`DELETE FROM company WHERE id = '${id}'`, (err)=>{
             if(err) throw new Error(err);
         })
-        res.redirect('/manage_user');
+        res.redirect('/manager');
     } catch(err){
         res.send(err.message);
-    }
-})
-
- router.get('/approve_list', (req,res)=>{
-    try{
-        db.query(`SELECT * FROM game WHERE approval = false`,(err, games)=>{
-            if(err) throw new Error(err);
-            console.log(games)
-            let game_list = approve_game_view.game_list(games)
-            let summary = approve_game_view.summary(games);
-            let html = approve_game_view.HTML(game_list, summary);
-            res.end(html);
-        });
-    } catch(err) {
-
     }
 })
 
@@ -197,7 +192,7 @@ router.post('/approve_game', (req,res)=>{
     try{
         db.query(`UPDATE game SET approval = true WHERE company_id = ? AND name = ?`,[company_id, name], (err)=>{
             if(err) throw new Error(err);
-            res.redirect('/approve_list');
+            res.redirect('/manager');
         })
     } catch(err) {
         res.send(err.message)

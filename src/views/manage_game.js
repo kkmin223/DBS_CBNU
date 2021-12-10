@@ -104,7 +104,7 @@ exports.HTML = (approved_game_list,unapproved_game_list, summary)=> {
                         <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="cart-title mt-50">
-                                    <h2>Approved Game List</h2>
+                                    <h2>Approved Game List <a href="#" class="btn btn-info" style=>Mypage</a></h2>
                                 </div>
                                 <div class="cart-table clearfix">
                                     <table class="table table-responsive">

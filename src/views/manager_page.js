@@ -1,4 +1,4 @@
-exports.HTML = (user_list,company_list) =>{
+exports.HTML = (user_list,company_list,game_list,user_summary, game_summary) =>{
     return `
     <!DOCTYPE html>
         <html lang="en">
@@ -100,6 +100,12 @@ exports.HTML = (user_list,company_list) =>{
         
                 <div class="cart-table-area section-padding-100">
                     <div class="container-fluid">
+                    <div class="row">   
+                        <div class="cart-title mt-50">
+                            <h1>Manager Page</h1>
+                        </div>
+                    </div>
+                        </div>
                         <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="cart-title mt-50">
@@ -127,7 +133,8 @@ exports.HTML = (user_list,company_list) =>{
                             
                             <div class="col-12 col-lg-4">
                                 <div class="cart-summary">
-                                    <h5>User& Compnay Total</h5>
+                                    <h5>User/Compnay Summary</h5>
+                                        ${user_summary}
                                 </div>
                             </div>
                         </div>
@@ -156,9 +163,44 @@ exports.HTML = (user_list,company_list) =>{
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                        <div class="col-12 col-lg-8">
+                            <div class="cart-title mt-50">
+                                <h2>Approval Request List</h2>
+                            </div>
+    
+                            <div class="cart-table clearfix">
+                                <table class="table table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Description</th>
+                                            <th>System Requirements</th>
+                                            <th>Rating</th>
+                                            <th>Approval</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       ${game_list}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <div class="cart-summary">
+                                <h5>Approval Summary</h5>
+                                    ${game_summary}
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     </div>
                 </div>
             </div>
+
+                    
+
             <!-- ##### Main Content Wrapper End ##### -->
         
             <!-- ##### Newsletter Area Start ##### -->
@@ -317,3 +359,48 @@ exports.company_list = (companys) => {
     }
     return comapny_list  
 }
+
+exports.game_list = (games) => {
+    let game_list = '';
+    for(let i=0; i<games.length; i++){
+        game_list += `<tr>
+        <td class="name">
+        <a href='/approve_game_detail?company_id=${games[i].company_id}&game_name=${games[i].name}'><h5>${games[i].name}</h5></a>
+    </td>
+    <td class="price">
+        <span>${games[i].price}</span>
+    </td>
+    <td class="description">
+        <span>${games[i].description}</span>
+    </td>
+    <td class="requirements">
+        <span>${games[i].system_requirements}</span>
+    </td>
+    <td class="rating">
+        <span>${games[i].rating}</span>
+    </td>
+    <td class="approval">
+        <span>${games[i].approval}</span>
+    </td>
+    <tr>`
+    }
+    return game_list    
+    }
+    
+exports.game_summary = (games) => {
+    let unapproval = games.length;
+    
+    return `<ul class="summary-table">
+    <li><span>Unapproved Count:</span> <span>${unapproval}</span></li>
+    </ul>`
+    }
+
+exports.user_summary = (users, companys) => {
+        let user = users.length;
+        let company = companys.length;
+        
+        return `<ul class="summary-table">
+        <li><span>User Count:</span> <span>${user}</span></li>
+        <li><span>Company Count:</span> <span>${company}</span></li>
+        </ul>`
+        }
