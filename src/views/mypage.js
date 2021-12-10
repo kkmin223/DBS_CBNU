@@ -244,7 +244,7 @@ exports.show_info = (info,date) => {
                 `}
             else{
                 show_info +=`<div class="col-md-6 mb-3">
-                    <label>Phone Number</label>
+                    <label>Hompage</label>
                     <input type="text" class="form-control" name="homepage" id="homepage" value="${info[0].homepage}"  readonly>
                 </div>
                 <div class="col-md-6 mb-3">

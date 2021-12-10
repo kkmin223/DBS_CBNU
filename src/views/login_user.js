@@ -116,14 +116,10 @@ exports.HTML = ( )=>{
                                     </div>
 
                                     
-                                    <div class = "col-12 mb-3"float:left; width 20% >   
-                                        <h4>Are you</h4>
+                                    <div class = "col-12 mb-3" >   
                                         <a href="/login_user" class="btn btn-outline-warning" >User</a>
                                         <a href="/login_company" class="btn btn-outline-warning" >Company</a>
                                         <a href="/login_manager" class="btn btn-outline-warning" >Manger</a>
-                                    <div class = "col-12 mb-3"float:left; width 20% >   
-
-                                        <h4> ?</h4>
                                     </div></br>
 
                                     <form action="/login_user" method="post">
