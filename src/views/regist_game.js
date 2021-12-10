@@ -106,11 +106,11 @@ exports.HTML = () => {
                             <div class="cart-title">
                                 <h2>Register Game</h2>
                             </div>
-                            <form action="/regist_game" method="post">
+                            <form action="/regist_game" method="post"  enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label>Game Image</label><br>
-                                        <input type="file" name="images" id="game_images" accept="image/*" multiple>
+                                        <input type="file" name="game_img" id="game_img" accept="image/*">
                                     </div>
                                     <div class="col-md-12 mb-3">
                                         <label>Game Name</label>
