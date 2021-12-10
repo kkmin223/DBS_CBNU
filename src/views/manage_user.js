@@ -2,7 +2,6 @@ exports.HTML = (user_list,company_list) =>{
     return `
     <!DOCTYPE html>
         <html lang="en">
-        
         <head>
             <meta charset="UTF-8">
             <meta name="description" content="">

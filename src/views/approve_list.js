@@ -1,3 +1,5 @@
+const db = require('../DB/index');
+
 exports.HTML = (game_list, summary)=> {
     return `
     <!DOCTYPE html>

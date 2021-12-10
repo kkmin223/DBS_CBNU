@@ -1,4 +1,4 @@
-exports.HTML = (game_list, summary)=> {
+exports.HTML = (approved_game_list,unapproved_game_list, summary)=> {
         return `
         <!DOCTYPE html>
         <html lang="en">
@@ -104,23 +104,22 @@ exports.HTML = (game_list, summary)=> {
                         <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="cart-title mt-50">
-                                    <h2>Registered Game List</h2>
+                                    <h2>Approved Game List</h2>
                                 </div>
-        
                                 <div class="cart-table clearfix">
                                     <table class="table table-responsive">
                                         <thead>
                                             <tr>
+                                                <th></th>
                                                 <th>Name</th>
                                                 <th>Price</th>
                                                 <th>Description</th>
                                                 <th>System Requirements</th>
                                                 <th>Rating</th>
-                                                <th>Approval</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                           ${game_list}
+                                           ${approved_game_list}
                                         </tbody>
                                     </table>
                                 </div>
@@ -129,6 +128,28 @@ exports.HTML = (game_list, summary)=> {
                                 <div class="cart-summary">
                                     <h5>Game Total</h5>
                                         ${summary}
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-8">
+                                <div class="cart-title mt-50">
+                                    <h2>UnApproved Game List</h2>
+                                </div>
+                                <div class="cart-table clearfix">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Description</th>
+                                                <th>System Requirements</th>
+                                                <th>Rating</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           ${unapproved_game_list}
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -231,10 +252,40 @@ exports.HTML = (game_list, summary)=> {
         `
 }
 
-exports.game_list = (games) => {
-    let game_list = '';
+exports.approved_game_list = (games) => {
+    let approved_game_list = '';
     for(let i=0; i<games.length; i++){
-        game_list += `<tr>
+        approved_game_list += `<tr>
+        <td class="del">
+        <a href="/modify_game?company_id=${games[i].company_id}&game_name=${games[i].name}" class="btn btn-warning active">Modify</a>
+        </td>
+        <td class="name">
+        <a href='/user_game_detail?company_id=${games[i].company_id}&game_name=${games[i].name}'><h5>${games[i].name}</h5></a>
+    </td>
+    <td class="price">
+        <span>${games[i].price}</span>
+    </td>
+    <td class="description">
+        <span>${games[i].description}</span>
+    </td>
+    <td class="requirements">
+        <span>${games[i].system_requirements}</span>
+    </td>
+    <td class="rating">
+        <span>${games[i].rating}</span>
+    </td>
+    <tr>`
+    }
+    return approved_game_list    
+}
+
+exports.unapproved_game_list = (games) => {
+    let unapproved_game_list = '';
+    for(let i=0; i<games.length; i++){
+        unapproved_game_list += `<tr>
+        <td class="del">
+        <a href="/modify_game?company_id=${games[i].company_id}&game_name=${games[i].name}" class="btn btn-warning active">Modify</a>
+        </td>
         <td class="name">
         <h5>${games[i].name}</h5>
     </td>
@@ -250,25 +301,16 @@ exports.game_list = (games) => {
     <td class="rating">
         <span>${games[i].rating}</span>
     </td>
-    <td class="approval">
-        <span>${games[i].approval}</span>
-    </td>
     <tr>`
     }
-    return game_list    
+    return unapproved_game_list    
 }
 
-exports.summary = (games) => {
-    let approval = 0;
-    let unapproval = games.length;
-    for(let i=0; i<games.length; i++){
-        if(games[i].approval){
-            approval++;
-        }
-    }
-    unapproval = unapproval - approval;
+exports.summary = (approve_games, unapprove_games,company_id) => {
+    let approval = approve_games.length;
+    let unapproval = unapprove_games.length;
     return `<ul class="summary-table">
-    <li><span>Company:</span> <span>${games[0].company_id}</span></li>
+    <li><span>Company:</span> <span>${company_id}</span></li>
     <li><span>Approval Count:</span> <span>${approval}</span></li>
     <li><span>Unapproved Count:</span> <span>${unapproval}</span></li>
     </ul>`
