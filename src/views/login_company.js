@@ -112,10 +112,11 @@ exports.HTML = ( )=>{
                                     <h2>Login</h2></br>
                                 </div>
                                 
-                                    <a href="/login_user" class="btn btn-warning" >User</a> &nbsp;
-                                    <a href="/login_company" class="btn btn-warning" >Company</a>&nbsp;
-                                    <a href="/login_manager" class="btn btn-warning" >Manger</a>
-                                    </br>    
+                                <div class = "col-12 mb-3" >   
+                                    <a href="/login_user" class="btn btn-outline-warning" >User</a>
+                                    <a href="/login_company" class="btn btn-outline-warning" >Company</a>
+                                    <a href="/login_manager" class="btn btn-outline-warning" >Manger</a>
+                                </div></br>
 
                                 <form action="/login_company" method="post">
                                         <div class="col-6 mb-3" >
