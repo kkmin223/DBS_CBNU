@@ -288,6 +288,7 @@ exports.HTML = (game_list)=>{
                             <li><a href="product-details.html">Product</a></li>
                             <li><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
                             <li><a href="/logout">Logout</a></li>
+                            <li><a href="/mypage">My Page</a></li>
                         </ul>
                     </nav>
                     <!-- Button Group -->

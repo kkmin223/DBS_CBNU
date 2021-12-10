@@ -7,8 +7,7 @@ const host = "localhost";
 let connection = mysql.createConnection({
     host     :  host,
     user     : 'root',
-    password : '1234',      //각자 비밀번호 사용
-    port: 3305,
+    password : 'chjh1436',      //각자 비밀번호 사용
     database : 'dbs_project',
   });
 
