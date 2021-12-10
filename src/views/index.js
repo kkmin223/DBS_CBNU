@@ -78,7 +78,7 @@ exports.HTML = (game_list)=>{
                             <li class="active"><a href="/">Home</a></li>
                             <li><a href="/shop">Shop</a></li>
                             <li><a href="product-details.html">Product</a></li>
-                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="/cart">Cart</a></li>
                             <li><a href="/login_user">Login</a></li>
                         </ul>
                     </nav>
@@ -284,9 +284,9 @@ exports.HTML = (game_list)=>{
                     <nav class="amado-nav">
                         <ul>
                             <li class="active"><a href="/">Home</a></li>
-                            <li><a href="shop.html">Shop</a></li>
+                            <li><a href="/shop">Shop</a></li>
                             <li><a href="product-details.html">Product</a></li>
-                            <li><a href="cart.html">Cart</a></li>
+                            <li><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
                             <li><a href="/logout">Logout</a></li>
                         </ul>
                     </nav>

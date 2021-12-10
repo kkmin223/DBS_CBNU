@@ -1,3 +1,5 @@
+const store = require('store')
+
 exports.HTML = (game_list, category_set)=> {
     return `
         <!DOCTYPE html>
@@ -275,7 +277,7 @@ exports.game_list = (games) => {
                         <h6>${games[i].description}</h6>
                     </div>
                 <div class="cart">
-                    <a href="cart.html" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                    <a href="/cartplus?user_id=${store.get('key').id}&company_id=${games[i].company_id}&game_name=${games[i].name}&amount=${games[i].price}" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
                 </div>
             </div>
         </div>

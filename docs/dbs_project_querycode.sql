@@ -68,26 +68,28 @@ create table Gameorder(	-- 6th
 	user_id		varchar(45)	NOT NULL,	-- foreign key (will combine to be PK)
     company_id	varchar(45)	NOT NULL,	-- foreign key (will combine to be PK)
     game_name	varchar(45)	NOT NULL,	-- foreign key (will combine to be PK)
-    order_date	date		NOT NULL,
-    order_no	int			NOT NULL,
+    order_date	timestamp Default now(),
+    order_no	int			Unsigned Auto_increment,
     email		varchar(45)	NOT NULL,
     amount		int			NOT NULL,
     CONSTRAINT PK_Gameorder PRIMARY KEY (user_id, company_id, game_name),
 	CONSTRAINT FK_Gameorder_User FOREIGN KEY (user_id) REFERENCES User(id),
 	CONSTRAINT FK_Gameorder_Company FOREIGN KEY (company_id) REFERENCES Company(id),
-	CONSTRAINT FK_Gameorder_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name)
+	CONSTRAINT FK_Gameorder_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name),
+    UNIQUE KEY uk_name (order_no)
 );
 
 create table Cart(	-- 7th
 	user_id		varchar(45)	NOT NULL,	-- foreign key (will combine to be PK)
     company_id	varchar(45)	NOT NULL,	-- foreign key (will combine to be PK)
     game_name	varchar(45)	NOT NULL,	-- foreign key (will combine to be PK)
-    cart_no		int			NOT NULL,
+    cart_no		int			Unsigned Auto_increment,
     amount		int			NOT NULL,
     CONSTRAINT PK_Cart PRIMARY KEY (user_id, company_id, game_name),
 	CONSTRAINT FK_Cart_User FOREIGN KEY (user_id) REFERENCES User(id),
 	CONSTRAINT FK_Cart_Company FOREIGN KEY (company_id) REFERENCES Company(id),
-	CONSTRAINT FK_Cart_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name)
+	CONSTRAINT FK_Cart_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name),
+    UNIQUE KEY uk_name (cart_no)
 );
 
 create table Category(	-- 8th
