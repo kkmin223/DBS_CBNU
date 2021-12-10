@@ -4,21 +4,36 @@ const router = express.Router();
 const game_query = require('../query/game_query')
 const path = require('path');
 const url = require('url');
+const fs = require('fs');
 const manage_game_view = require('../views/manage_game')
 const regist_game_view = require('../views/regist_game')
 const approve_game_view = require('../views/approve_list')
 const approve_game_detail_view = require('../views/approve_game_detail')
+const manage_user_view = require('../views/manage_user')
+const multer = require('multer');
+const upload = multer({
+  storage: multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+      cb(null, new Date().valueOf() + path.extname(file.originalname));
+    }
+  }),
+});
 
 router.get('/regist_game', (req,res)=>{
     let html = regist_game_view.HTML();
     res.end(html)
 });
-router.post('/regist_game', (req,res)=> {
+router.post('/regist_game', upload.single('game_img'),(req,res)=> {
     let data = req.body;
     console.log(req.body);
+    console.log(req.file)
     try{
+        let imgData = readImageFile(`${req.file.path}`)
         db.query(game_query.add_game
-            ,["게임회사1", data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating]
+            ,["게임회사1", data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating, imgData]
             ,(err) => {
                 if (err) throw new Error(err);
             });
@@ -61,6 +76,47 @@ router.post('/regist_game', (req,res)=> {
         res.send(err.message);
      }
  })
+
+router.get('/manage_user', (req,res)=>{
+    try{
+        db.query(`SELECT * FROM user`, (err,users)=>{
+            if(err) throw new Error(err);
+            db.query(`SELECT * FROM company`, (err,companys)=>{
+                if(err) throw new Error(err);
+                let user_list = manage_user_view.user_list(users);
+                let company_list = manage_user_view.company_list(companys);
+                let html = manage_user_view.HTML(user_list,company_list);
+                res.end(html);
+            })
+        })
+    } catch(err) {
+        console.log(err)
+        res.send(err.message);
+    }
+});
+
+router.get('/user/del', (req,res)=>{
+    const {id} = url.parse(req.url,true).query;
+    try{
+        db.query(`DELETE FROM user WHERE id = ${id}`, (err)=>{
+            if(err) throw new Error(err);
+        })
+    } catch(err){
+        res.send(err.message);
+    }
+})
+
+router.get('/company/del', (req,res)=>{
+    const {id} = url.parse(req.url,true).query;
+    try{
+        db.query(`DELETE FROM company WHERE id = '${id}'`, (err)=>{
+            if(err) throw new Error(err);
+        })
+        res.redirect('/manage_user');
+    } catch(err){
+        res.send(err.message);
+    }
+})
 
  router.get('/approve_list', (req,res)=>{
     try{
@@ -107,11 +163,17 @@ router.get('/approve_game_detail', (req,res)=>{
                 })
             })
         })
-        
      } catch(err) {
         res.send(err.message)
      }
  })
 
+ function readImageFile(file){
+    const bitmap = fs.readFileSync(file);
+    const buf = new Buffer.from(bitmap)
+    return buf
+  }
+
+
+
  module.exports = router
- 

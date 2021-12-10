@@ -275,8 +275,6 @@ exports.game_detail = (game, category, language) =>{
                         <div class="category">
                             Category
                                 ${category}
-                                <li>Action</li>
-                                <li>FPS</li>
                         </div>
                         <div class="language ml-5">
                             Language
