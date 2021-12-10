@@ -112,10 +112,10 @@ exports.HTML = ( )=>{
                                     <h2>Login</h2></br>
                                 </div>
 
-                                <div class = "col-12 mb-3">   
-                                    <a href="/login_user" class="btn-warning">User</a>
-                                    <a href="/login_company" class="btn-warning">Company</a>
-                                    <a href="/login_manager" class="btn-warning">Manger</a>
+                                <div class = "col-12 mb-3">  
+                                    <a href="/login_user" class="btn btn-warning" >User</a>
+                                    <a href="/login_company" class="btn btn-warning" >Company</a>
+                                    <a href="/login_manager" class="btn btn-warning" >Manger</a>
 
                                     <!--<form action="/login_user" style="width:10;float:left">
                                         <input type="submit" name="chk_info" value="User" checked="checked">
@@ -128,7 +128,8 @@ exports.HTML = ( )=>{
                                     <form action="/login_manager" style="width:10;float:left">
                                         <input type="submit" name="chk_info" value="Manager">
                                     </form> -->   
-                                </div></br>    
+                                </div>
+                                </br>    
 
                                 <form action="/login_manager" method="post">
                                         <div class="col-6 mb-3" >
