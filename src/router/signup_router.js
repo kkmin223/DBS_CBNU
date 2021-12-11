@@ -128,7 +128,7 @@ router.get('/mypage', function(req,res){
         })
     }
     else if(store.get('key').type == 'company'){
-        db.query('select * from company',function(err,info){
+        db.query('select * from company where id = ? ',[u_id],function(err,info){
             if(!err){
                 let show_info = mypage_view.show_info(info)
                 let html = mypage_view.HTML(show_info)

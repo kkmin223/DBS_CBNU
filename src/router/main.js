@@ -20,19 +20,23 @@ router.get('/', (req,res)=>{
       db.query(`SELECT * FROM game`,(err, games)=>{
           if(err) throw new Error(err);
           let game_list = index_view.game_list(games)
-          let html = index_view.HTML(game_list)
+          let menubar = index_view.menubar()
+          let html = index_view.HTML(game_list, menubar)
           res.end(html)
       });
   } catch(err) {
   }
 });
 
+
+
 router.get('/shop', (req,res) =>{
    try{
       db.query(`SELECT * FROM game;`, (err, game)=>{
           if(err) throw new Error(err);
           let game_list = shop_view.game_list(game)
-          let html = shop_view.HTML(game_list)
+          let menubar = shop_view.menubar()
+          let html = shop_view.HTML(game_list,menubar)
           res.end(html)
       });
    } catch(err) {
@@ -52,7 +56,8 @@ router.get('/shop_search', (req,res) =>{
       db.query(`select * from game where name like ?`, [query], (err, game)=>{
           if(err) throw new Error(err);
           let game_list = shop_search_view.game_list(game)
-          let html = shop_search_view.HTML(game_list)
+          let menubar = shop_search_view.menubar()
+          let html = shop_search_view.HTML(game_list, menubar)
           res.end(html)
       });
    } catch(err) {
@@ -64,7 +69,8 @@ router.get('/cartplus', (req,res) =>{
    try{
       db.query(`INSERT INTO cart (user_id, company_id, game_name, amount) VALUES (?,?,?,?)`, [user_id, company_id, game_name, amount], (err)=>{
           if(err) throw new Error(err);
-          let html = cart_plus_view.HTML()
+          let menubar = cart_plus_view.menubar()
+          let html = cart_plus_view.HTML(menubar)
           res.end(html)
       });
    } catch(err) {
@@ -77,7 +83,8 @@ router.get('/cartremove', (req,res) =>{
    try{
       db.query(`Delete From cart Where cart.user_id = ? and cart.company_id = ? and cart.game_name = ?`, [user_id, company_id, game_name], (err)=>{
           if(err) throw new Error(err);
-          let html = cart_remove_view.HTML()
+          let menubar = cart_remove_view.menubar()
+          let html = cart_remove_view.HTML(menubar)
           res.end(html)
       });
    } catch(err) {
@@ -93,7 +100,8 @@ router.get('/shop_category', (req,res) =>{
           if(err) throw new Error(err);
           let game_list = shop_category_view.game_list(game)
           let category_set = shop_category_view.category_set(category)
-          let html = shop_category_view.HTML(game_list, category_set)
+          let menubar = shop_category_view.menubar()
+          let html = shop_category_view.HTML(game_list, category_set, menubar)
           res.end(html)
       });
   } catch(err) {
@@ -119,7 +127,8 @@ router.get('/cartpurchase', (req,res) =>{
               });
             });
          });
-         let html = cart_purchase_view.HTML()
+         let menubar = cart_purchase_view.menubar()
+         let html = cart_purchase_view.HTML(menubar)
          res.end(html)
       });
    } catch(err) {
@@ -160,7 +169,8 @@ router.get('/cart', (req,res) =>{
           if(err) throw new Error(err);
           let game_list = cart_view.game_list(game)
           let summary = cart_view.summary(game)
-          let html = cart_view.HTML(game_list,summary)
+          let menubar = cart_view.menubar()
+          let html = cart_view.HTML(game_list,summary,menubar)
           res.end(html)
       });
    } catch(err) {
