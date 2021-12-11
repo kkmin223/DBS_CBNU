@@ -33,20 +33,20 @@ router.post('/regist_game', upload.single('game_img'),(req,res)=> {
     try{
         let imgData = readImageFile(`${req.file.path}`)
         db.query(game_query.add_game
-            ,["게임회사1", data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating, imgData]
+            ,["네이버", data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating, imgData]
             ,(err) => {
                 if (err) throw new Error(err);
             });
         data.category.forEach(element => {
             db.query(game_query.add_category
-                ,["게임회사1", data.name,element]
+                ,["네이버", data.name,element]
                 , (err)=>{
                     if(err) throw new Error(err);
                 });
         });
         data.language.forEach(element => {
             db.query(game_query.add_language
-                ,["게임회사1", data.name,element]
+                ,["네이버", data.name,element]
                 , (err)=>{
                     if(err) throw new Error(err);
                 });
@@ -125,7 +125,8 @@ router.get('/company/del', (req,res)=>{
             console.log(games)
             let game_list = approve_game_view.game_list(games)
             let summary = approve_game_view.summary(games);
-            let html = approve_game_view.HTML(game_list, summary);
+            let menubar = approve_list_view.menubar()
+            let html = approve_game_view.HTML(game_list, summary, menubar);
             res.end(html);
         });
     } catch(err) {
@@ -158,7 +159,8 @@ router.get('/approve_game_detail', (req,res)=>{
                     let category = approve_game_detail_view.category(categories)
                     let language = approve_game_detail_view.language(languages);
                     let game_detail = approve_game_detail_view.game_detail(game,category,language)
-                    let html = approve_game_detail_view.HTML(game_detail);
+                    let menubar = approve_game_view.menubar()
+                    let html = approve_game_detail_view.HTML(game_detail, menubar);
                     res.end(html)
                 })
             })

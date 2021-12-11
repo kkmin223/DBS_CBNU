@@ -1,6 +1,6 @@
 const store = require('store')
 
-exports.HTML = (game_list, category_set)=> {
+exports.HTML = (game_list, category_set, menubar)=> {
     return `
         <!DOCTYPE html>
         <html lang="en">
@@ -73,12 +73,8 @@ exports.HTML = (game_list, category_set)=> {
                     <!-- Amado Nav -->
                     <nav class="amado-nav">
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/shop">Shop</a></li>
-                            <li><a href="product-details.html">Product</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li class="active"><a href="/login_user">Login</a></li>
-                    </ul>
+                            ${menubar}
+                        </ul>
                     </nav>
                     <!-- Button Group -->
                     <div class="amado-btn-group mt-30 mb-100">
@@ -87,8 +83,6 @@ exports.HTML = (game_list, category_set)=> {
                     </div>
                     <!-- Cart Menu -->
                     <div class="cart-fav-search mb-100">
-                        <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                        <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
                         <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
                     </div>
                     <!-- Social Button -->
@@ -152,31 +146,6 @@ exports.HTML = (game_list, category_set)=> {
             </div>
             <!-- ##### Main Content Wrapper End ##### -->
 
-            <!-- ##### Newsletter Area Start ##### -->
-            <section class="newsletter-area section-padding-100-0">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <!-- Newsletter Text -->
-                        <div class="col-12 col-lg-6 col-xl-7">
-                            <div class="newsletter-text mb-100">
-                                <h2>Subscribe for a <span>25% Discount</span></h2>
-                                <p>Nulla ac convallis lorem, eget euismod nisl. Donec in libero sit amet mi vulputate consectetur. Donec auctor interdum purus, ac finibus massa bibendum nec.</p>
-                            </div>
-                        </div>
-                        <!-- Newsletter Form -->
-                        <div class="col-12 col-lg-6 col-xl-5">
-                            <div class="newsletter-form mb-100">
-                                <form action="#" method="post">
-                                    <input type="email" name="email" class="nl-email" placeholder="Your E-mail">
-                                    <input type="submit" value="Subscribe">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- ##### Newsletter Area End ##### -->
-
             <!-- ##### Footer Area Start ##### -->
             <footer class="footer_area clearfix">
                 <div class="container">
@@ -202,23 +171,7 @@ exports.HTML = (game_list, category_set)=> {
                                     <nav class="navbar navbar-expand-lg justify-content-end">
                                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
                                         <div class="collapse navbar-collapse" id="footerNavContent">
-                                            <ul class="navbar-nav ml-auto">
-                                                <li class="nav-item active">
-                                                    <a class="nav-link" href="index.html">Home</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="shop.html">Shop</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="product-details.html">Product</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="cart.html">Cart</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="login.html">Login</a>
-                                                </li>
-                                            </ul>
+                                            
                                         </div>
                                     </nav>
                                 </div>
@@ -520,4 +473,27 @@ exports.category_set = (category) => {
     }
 
     return game_list    
+}
+
+//로그인 안한 상태로, 사이드바 메뉴에 Login이 있다.
+//로그인 한 상태로, 사이드 메뉴에 Login 대신 Logout이 있다.
+exports.menubar = () =>{
+    let menubar = '';
+    if(store.get('key').id == null){
+        menubar += `                          
+        <li><a href="/">Home</a></li>
+        <li class="active"><a href="/shop">Shop</a></li>
+        <li><a href="/cart">Cart</a></li>
+        <li><a href="/login_user">Login</a></li>`
+    }
+    else{
+        menubar += `                            
+        <li><a href="/">Home</a></li>
+        <li class="active"><a href="/shop">Shop</a></li>
+        <li><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/mypage">My Page</a></li>`
+    }
+
+    return menubar
 }

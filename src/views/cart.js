@@ -1,6 +1,6 @@
 const store = require('store')
 
-exports.HTML = (game_list, summary)=> {
+exports.HTML = (game_list, summary, menubar)=> {
     return `
     <!DOCTYPE html>
 <html lang="en">
@@ -73,11 +73,7 @@ exports.HTML = (game_list, summary)=> {
             <!-- Amado Nav -->
             <nav class="amado-nav">
                 <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="product-details.html">Product</a></li>
-                    <li class="active"><a href="cart.html">Cart</a></li>
-                    <li><a href="/login_user">Login</a></li>
+                    ${menubar}
                 </ul>
             </nav>
             <!-- Button Group -->
@@ -87,8 +83,6 @@ exports.HTML = (game_list, summary)=> {
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="cart.html" class="cart-nav"><img src="img/core-img/cart.png" alt=""> Cart <span>(0)</span></a>
-                <a href="#" class="fav-nav"><img src="img/core-img/favorites.png" alt=""> Favourite</a>
                 <a href="#" class="search-nav"><img src="img/core-img/search.png" alt=""> Search</a>
             </div>
             <!-- Social Button -->
@@ -132,50 +126,26 @@ exports.HTML = (game_list, summary)=> {
     </div>
     <!-- ##### Main Content Wrapper End ##### -->
 
-    <!-- ##### Newsletter Area Start ##### -->
-    <section class="newsletter-area section-padding-100-0">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Newsletter Text -->
-                <div class="col-12 col-lg-6 col-xl-7">
-                    <div class="newsletter-text mb-100">
-                        <h2>Subscribe for a <span>25% Discount</span></h2>
-                        <p>Nulla ac convallis lorem, eget euismod nisl. Donec in libero sit amet mi vulputate consectetur. Donec auctor interdum purus, ac finibus massa bibendum nec.</p>
-                    </div>
-                </div>
-                <!-- Newsletter Form -->
-                <div class="col-12 col-lg-6 col-xl-5">
-                    <div class="newsletter-form mb-100">
-                        <form action="#" method="post">
-                            <input type="email" name="email" class="nl-email" placeholder="Your E-mail">
-                            <input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ##### Newsletter Area End ##### -->
-
+    
     <!-- ##### Footer Area Start ##### -->
     <footer class="footer_area clearfix">
         <div class="container">
             <div class="row align-items-center">
-                <!-- Single Widget Area -->
-                <div class="col-12 col-lg-4">
-                    <div class="single_widget_area">
-                        <!-- Logo -->
-                        <div class="footer-logo mr-50">
-                            <a href="/"><img src="img/core-img/logo2.png" alt=""></a>
-                        </div>
-                        <!-- Copywrite Text -->
-                        <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->& Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
-</p>
+            <!-- Single Widget Area -->
+            <div class="col-12 col-lg-4">
+                <div class="single_widget_area">
+                    <!-- Logo -->
+                    <div class="footer-logo mr-50">
+                        <a href="/"><img src="img/core-img/logo2.png" alt=""></a>
                     </div>
+                    <!-- Copywrite Text -->
+                    <p class="copywrite"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> & Re-distributed by <a href="https://themewagon.com/" target="_blank">Themewagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                 </div>
-                <!-- Single Widget Area -->
+            </div>
+
+            <!-- Single Widget Area -->
                 <div class="col-12 col-lg-8">
                     <div class="single_widget_area">
                         <!-- Footer Menu -->
@@ -183,23 +153,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                             <nav class="navbar navbar-expand-lg justify-content-end">
                                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#footerNavContent" aria-controls="footerNavContent" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
                                 <div class="collapse navbar-collapse" id="footerNavContent">
-                                    <ul class="navbar-nav ml-auto">
-                                        <li class="nav-item active">
-                                            <a class="nav-link" href="/">Home</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="shop.html">Shop</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="product-details.html">Product</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="cart.html">Cart</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/login_user">Login</a>
-                                        </li>
-                                    </ul>
+                                    
                                 </div>
                             </nav>
                         </div>
@@ -250,29 +204,6 @@ exports.game_list = (games) => {
     return game_list    
 }
 
-exports.game_list = (games) => {
-    let game_list = '';
-    for(let i=0; i<games.length; i++){
-        const buffer = Buffer.from(games[i].img);
-        const image = buffer.toString('base64');
-        game_list += `<tr>
-        <td class="cart_product_img">
-            <a href="#"><img src="data:image/png;base64,${image}" alt="Product"></a>
-        </td>
-        <td class="cart_product_desc">
-            <h5>${games[i].name}</h5>
-        </td>
-        <td class="price">
-            <span>${games[i].price}</span>
-        </td>
-        <td class="price">
-            <a href="/cartremove?user_id=${store.get('key').id}&company_id=${games[i].company_id}&game_name=${games[i].name}" data-toggle="tooltip" data-placement="left" title="remove from Cart"><img src="img/core-img/trash.png" alt=""></a>
-        </td>
-    <tr>`
-}
-    return game_list    
-}
-
 exports.summary = (games) => {
     var subtotal = 0
     let result = ''
@@ -293,4 +224,27 @@ exports.summary = (games) => {
     </div>
     </div>`
     return result;
+}
+
+//로그인 안한 상태로, 사이드바 메뉴에 Login이 있다.
+//로그인 한 상태로, 사이드 메뉴에 Login 대신 Logout이 있다.
+exports.menubar = () =>{
+    let menubar = '';
+    if(store.get('key').id == null){
+        menubar += `                          
+        <li><a href="/">Home</a></li>
+        <li><a href="/shop">Shop</a></li>
+        <li class="active"><a href="/cart">Cart</a></li>
+        <li><a href="/login_user">Login</a></li>`
+    }
+    else{
+        menubar += `                            
+        <li><a href="/">Home</a></li>
+        <li><a href="/shop">Shop</a></li>
+        <li class="active"><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <li><a href="/mypage">My Page</a></li>`
+    }
+
+    return menubar
 }
