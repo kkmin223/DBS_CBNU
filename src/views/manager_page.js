@@ -1,3 +1,5 @@
+const store = require('store')
+
 exports.HTML = (user_list,company_list,game_list,user_summary, game_summary) =>{
     return `
     <!DOCTYPE html>
