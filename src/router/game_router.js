@@ -212,7 +212,7 @@ router.get('/approve_game_detail', (req,res)=>{
                     let category = approve_game_detail_view.category(categories)
                     let language = approve_game_detail_view.language(languages);
                     let game_detail = approve_game_detail_view.game_detail(game,category,language)
-                    let menubar = approve_game_view.menubar()
+                    let menubar = approve_game_detail_view.menubar()
                     let html = approve_game_detail_view.HTML(game_detail, menubar);
                     res.end(html)
                 })
