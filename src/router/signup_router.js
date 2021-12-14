@@ -16,6 +16,8 @@ const signup_user_view = require('../views/signup_user')
 const signup_company_view = require('../views/signup_company')
 const signup_success_view = require('../views/signup_success')
 
+const orderlist_view = require('../views/orderlist')
+
 
 
 store.set('key',{id:null, type:null})   //key의 기본값 세팅
@@ -195,6 +197,20 @@ router.post('/signup_user', (req,res)=> {
    
  }); 
  
- 
+ router.get('/orderlist', (req,res)=>{
+     try{
+        db.query(`SELECT company_id, game_name, DATE_FORMAT(order_date, '%y-%m-%d %h:%m:%s') as order_date, price FROM gameorder WHERE user_id = ?`, [store.get('key').id], (err,orders)=>{
+            if(err) throw new Error(err);
+            let orderlist = orderlist_view.orderlist(orders);
+            let summary = orderlist_view.summary(orders,store.get('key').id);
+            let html = orderlist_view.HTML(orderlist,summary);
+            res.end(html);
+        });
+     } catch(err) {
+         res.writeHead(err);
+     }
+ })
+
+
  module.exports = router
  

@@ -122,7 +122,7 @@ router.get('/cartpurchase', (req,res) =>{
             db.query(`Select * From cart Where cart.user_id = ?`, [user_id], (err, games)=>{
                if(err) throw new Error(err);
                for(let i=0; i<number.length; i++){
-                  db.query(`INSERT INTO gameorder (user_id, company_id, game_name, email, price) VALUES (?,?,?,?,?)`, [games[i].user_id, games[i].company_id, games[i].game_name, email, games[i].price], (err)=>{
+                  db.query(`INSERT INTO gameorder (user_id, company_id, game_name, email, price) VALUES (?,?,?,?,?)`, [games[i].user_id, games[i].company_id, games[i].game_name, email[0].email, games[i].price], (err)=>{
                      if(err) throw new Error(err);
                   });
                }
@@ -164,6 +164,8 @@ router.get('/user_game_detail', (req,res)=>{
        res.send(err.message)
     }
 })
+
+
 
 
 
