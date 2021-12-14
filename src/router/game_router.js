@@ -5,6 +5,7 @@ const game_query = require('../query/game_query')
 const path = require('path');
 const url = require('url');
 const fs = require('fs');
+const store = require('store')
 const manage_game_view = require('../views/manage_game')
 const regist_game_view = require('../views/regist_game')
 const approve_game_detail_view = require('../views/approve_game_detail')
@@ -34,20 +35,20 @@ router.post('/regist_game', upload.single('game_img'),(req,res)=> {
     try{
         let imgData = readImageFile(`${req.file.path}`)
         db.query(game_query.add_game
-            ,["네이버", data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating, imgData]
+            ,[store.get('key').id, data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating, imgData]
             ,(err) => {
                 if (err) throw new Error(err);
             });
         data.category.forEach(element => {
             db.query(game_query.add_category
-                ,["네이버", data.name,element]
+                ,[store.get('key').id, data.name,element]
                 , (err)=>{
                     if(err) throw new Error(err);
                 });
         });
         data.language.forEach(element => {
             db.query(game_query.add_language
-                ,["네이버", data.name,element]
+                ,[store.get('key').id, data.name,element]
                 , (err)=>{
                     if(err) throw new Error(err);
                 });
@@ -64,15 +65,14 @@ router.post('/regist_game', upload.single('game_img'),(req,res)=> {
 
  router.get('/manage_game', (req,res)=>{
      try{
-        db.query(`SELECT * FROM game WHERE company_id = ? AND approval='1'`, ["게임회사1"],(err, approve_games)=>{
+        db.query(`SELECT * FROM game WHERE company_id = ? AND approval='1'`, [store.get('key').id],(err, approve_games)=>{
             if(err) throw new Error(err);
-            db.query(`SELECT * FROM game WHERE company_id = ? AND approval='0'`, ["게임회사1"],(err, unapprove_games)=>{
+            db.query(`SELECT * FROM game WHERE company_id = ? AND approval='0'`, [store.get('key').id],(err, unapprove_games)=>{
                 if(err) throw new Error(err);
-                console.log(approve_games)
-                console.log(unapprove_games)
+                console.log(store.get('key').id)
                 let approved_game_list = manage_game_view.approved_game_list(approve_games)
                 let unapproved_game_list = manage_game_view.unapproved_game_list(unapprove_games)
-                let summary = manage_game_view.summary(approve_games, unapprove_games, "게임회사1");
+                let summary = manage_game_view.summary(approve_games, unapprove_games, store.get('key').id);
                 let html = manage_game_view.HTML(approved_game_list,unapproved_game_list, summary);
                 res.end(html);
             })
@@ -110,21 +110,21 @@ router.post('/update_game', (req,res)=>{
     let data = req.body;
     try{
         db.query(`UPDATE game SET name=?, release_date=?, price=?, description=?, system_requirements=?, rating=? WHERE company_id = ? AND name=?`
-        ,[data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating,"게임회사1",data.name]
+        ,[data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating,store.get('key').id,data.name]
         ,(err)=>{
             if(err) throw new Error(err);
-            db.query(`DELETE FROM category WHERE company_id=? AND game_name=?`,["게임회사1", data.name]);
-            db.query(`DELETE FROM language WHERE company_id=? AND game_name=?`,["게임회사1", data.name]);
+            db.query(`DELETE FROM category WHERE company_id=? AND game_name=?`,[store.get('key').id, data.name]);
+            db.query(`DELETE FROM language WHERE company_id=? AND game_name=?`,[store.get('key').id, data.name]);
             data.category.forEach(element => {
                 db.query(game_query.add_category
-                    ,["게임회사1", data.name,element]
+                    ,[store.get('key').id, data.name,element]
                     , (err)=>{
                         if(err) throw new Error(err);
                     });
             });
             data.language.forEach(element => {
                 db.query(game_query.add_language
-                    ,["게임회사1", data.name,element]
+                    ,[store.get('key').id, data.name,element]
                     , (err)=>{
                         if(err) throw new Error(err);
                     });

@@ -74,7 +74,7 @@ exports.HTML = () => {
                 <ul>
                     <li><a href="/">Home</a></li>
                     <li><a href="/shop">Shop</a></li>
-                    <li class="active"><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
+                    <li><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
                     <li><a href="/logout">Logout</a></li>
                     <li class="active"><a href="/mypage">My Page</a></li>
                 </ul>
