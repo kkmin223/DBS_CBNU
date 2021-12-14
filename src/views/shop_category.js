@@ -34,10 +34,10 @@ exports.HTML = (game_list, category_set, menubar)=> {
                     <div class="row">
                         <div class="col-12">
                             <div class="search-content">
-                                <form action="#" method="get">
-                                    <input type="search" name="search" id="search" placeholder="Type your keyword...">
-                                    <button type="submit"><img src="img/core-img/search.png" alt=""></button>
-                                </form>
+                            <form action="/shop_search" method="get">
+                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                            <button type="submit"><img src="img/core-img/search.png" alt=""></button>
+                        </form>
                             </div>
                         </div>
                     </div>
@@ -228,7 +228,7 @@ exports.game_list = (games) => {
                         <h6>${games[i].description}</h6>
                     </div>
                 <div class="cart">
-                    <a href="/cartplus?user_id=${store.get('key').id}&company_id=${games[i].company_id}&game_name=${games[i].name}&amount=${games[i].price}" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
+                    <a href="/cartplus?user_id=${store.get('key').id}&company_id=${games[i].company_id}&game_name=${games[i].name}&price=${games[i].price}" data-toggle="tooltip" data-placement="left" title="Add to Cart"><img src="img/core-img/cart.png" alt=""></a>
                 </div>
             </div>
         </div>
