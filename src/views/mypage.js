@@ -169,7 +169,7 @@ exports.show_info = (info,date) => {
                 show_info += 
                 `<div class="login_details_area mt-50 clearfix">
     <div class="login-title">
-        <h2>My Page</h2>
+        <h2>My Page <a href="/orderlist" class="btn btn-info" style=>Order List</a></h2>
     </div>
     <div>
         <h5>Welcom, ${info[0].name}!</h5>
