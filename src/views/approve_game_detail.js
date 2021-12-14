@@ -1,4 +1,5 @@
 const store = require('store')
+
 exports.HTML = (game_detail,menubar) => {
     return `
     <!DOCTYPE html>
@@ -51,7 +52,7 @@ exports.HTML = (game_detail,menubar) => {
         <div class="mobile-nav">
             <!-- Navbar Brand -->
             <div class="amado-navbar-brand">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="/"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Navbar Toggler -->
             <div class="amado-navbar-toggler">
@@ -67,7 +68,7 @@ exports.HTML = (game_detail,menubar) => {
             </div>
             <!-- Logo -->
             <div class="logo">
-                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                <a href="/"><img src="img/core-img/logo.png" alt=""></a>
             </div>
             <!-- Amado Nav -->
             <nav class="amado-nav">

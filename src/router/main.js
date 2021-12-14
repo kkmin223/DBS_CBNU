@@ -148,8 +148,9 @@ router.get('/user_game_detail', (req,res)=>{
                    let category = user_game_detail_view.category(categories)
                    let language = user_game_detail_view.language(languages);
                    let add_to_cart = user_game_detail_view.add_to_cart(game);
+                   let menubar = user_game_detail_view.menubar()
                    let game_detail = user_game_detail_view.game_detail(game,category,language,add_to_cart)
-                   let html = user_game_detail_view.HTML(game_detail);
+                   let html = user_game_detail_view.HTML(game_detail,menubar);
                    res.end(html)
                })
            })
