@@ -47,16 +47,17 @@ create table Game(	-- 4th
     description 		text,					-- 상세설명
     system_requirements	text,
     rating				varchar(45)	NOT NULL,
+    img                 mediumblob  NOT NULL,
     CONSTRAINT PK_Game PRIMARY KEY (company_id, name),
-    -- https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=whydda&logNo=221397918586 여기 사이트를 참고했다.
-	CONSTRAINT FK_Game_Company FOREIGN KEY (company_id) REFERENCES Company(id)
+    CONSTRAINT `FK_Game_Company` FOREIGN KEY (`company_id`) REFERENCES `dbs_project`.`company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 );
 
 create table Regist(	-- 5th
 	company_id	varchar(45)	NOT NULL,	-- foreign key (will combine to be PK)
     game_name	varchar(45)	NOT NULL,	-- foreign key (will combine to be PK)
 	manager_id	varchar(45)	NOT NULL,	-- foreign key
-	regist_date	date		NOT NULL,
+    approval BOOLEAN DEFAULT FALSE NOT NULL,
+	regist_date	DATETIME	NOT NULL DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT PK_Regist PRIMARY KEY (company_id, game_name),
 	CONSTRAINT FK_Regist_Company FOREIGN KEY (company_id) REFERENCES Company(id),
 	CONSTRAINT FK_Regist_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name),
@@ -97,8 +98,8 @@ create table Category(	-- 8th
     game_name	varchar(45)	NOT NULL,	-- entity's key (will combine to be PK)
 	category	varchar(45)	NOT NULL,	-- key (will combine to be PK)
     CONSTRAINT PK_Category PRIMARY KEY (company_id, game_name, category),
-	CONSTRAINT FK_Category_Company FOREIGN KEY (company_id) REFERENCES Company(id),
-	CONSTRAINT FK_Category_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name)
+    CONSTRAINT `FK_Category_Company` FOREIGN KEY (`company_id`) REFERENCES `dbs_project`.`company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `FK_Category_Game` FOREIGN KEY (`company_id` , `game_name`) REFERENCES `dbs_project`.`game` (`company_id` , `name`) ON DELETE CASCADE ON UPDATE CASCADE;
 );
 
 create table Language(	-- 9th
@@ -106,57 +107,6 @@ create table Language(	-- 9th
     game_name	varchar(45)	NOT NULL,	-- entity's key (will combine to be PK)
 	language	varchar(45)	NOT NULL,	-- key (will combine to be PK)
     CONSTRAINT PK_Language PRIMARY KEY (company_id, game_name, language),
-	CONSTRAINT FK_Language_Company FOREIGN KEY (company_id) REFERENCES Company(id),
-	CONSTRAINT FK_Language_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name)
+	CONSTRAINT `FK_Language_Company` FOREIGN KEY (`company_id`) REFERENCES `dbs_project`.`company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `FK_Language_Game` FOREIGN KEY (`company_id` , `game_name`) REFERENCES `dbs_project`.`game` (`company_id` , `name`) ON DELETE CASCADE ON UPDATE CASCADE;
 );
-
-ALTER TABLE game  -- 승인 여부 추가
-ADD approval BOOLEAN DEFAULT FALSE NOT NULL;
-
- -- 이미지 칼럼 추가
-ALTER TABLE game ADD img mediumblob;
-
--- 카테고리 CASCADE 추가
-ALTER TABLE `dbs_project`.`category` 
-DROP FOREIGN KEY `FK_Category_Company`,
-DROP FOREIGN KEY `FK_Category_Game`;
-ALTER TABLE `dbs_project`.`category` 
-ADD CONSTRAINT `FK_Category_Company`
-  FOREIGN KEY (`company_id`)
-  REFERENCES `dbs_project`.`company` (`id`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-ADD CONSTRAINT `FK_Category_Game`
-  FOREIGN KEY (`company_id` , `game_name`)
-  REFERENCES `dbs_project`.`game` (`company_id` , `name`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE;
-
--- 언어 CASCADE 추가
-ALTER TABLE `dbs_project`.`language` 
-DROP FOREIGN KEY `FK_Language_Company`,
-DROP FOREIGN KEY `FK_Language_Game`;
-ALTER TABLE `dbs_project`.`language` 
-ADD CONSTRAINT `FK_Language_Company`
-  FOREIGN KEY (`company_id`)
-  REFERENCES `dbs_project`.`company` (`id`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-ADD CONSTRAINT `FK_Language_Game`
-  FOREIGN KEY (`company_id` , `game_name`)
-  REFERENCES `dbs_project`.`game` (`company_id` , `name`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE;
-
--- 게임 CASCADE 추가
-ALTER TABLE `dbs_project`.`game` 
-DROP FOREIGN KEY `FK_Game_Company`;
-ALTER TABLE `dbs_project`.`game` 
-ADD CONSTRAINT `FK_Game_Company`
-  FOREIGN KEY (`company_id`)
-  REFERENCES `dbs_project`.`company` (`id`)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE;
-
-alter table gameorder change amount price int;
-alter table cart change amount price int;

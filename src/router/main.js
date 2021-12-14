@@ -17,7 +17,7 @@ const store = require('store');
 
 router.get('/', (req,res)=>{
    try{
-      db.query(`SELECT * FROM game where approval = 1`,(err, games)=>{
+      db.query(`SELECT * FROM game as g LEFT JOIN regist as r ON g.company_id = r.company_id AND g.name = r.game_name WHERE r.approval = true`,(err, games)=>{
           if(err) throw new Error(err);
           let game_list = index_view.game_list(games)
           let menubar = index_view.menubar()
@@ -37,7 +37,7 @@ router.post('/', (req,res) =>{
 
 router.get('/shop', (req,res) =>{
    try{
-      db.query(`SELECT * FROM game where approval = 1;`, (err, game)=>{
+      db.query(`SELECT * FROM game as g LEFT JOIN regist as r ON g.company_id = r.company_id AND g.name = r.game_name WHERE r.approval = true`, (err, game)=>{
           if(err) throw new Error(err);
           let game_list = shop_view.game_list(game)
           let menubar = shop_view.menubar()
@@ -75,21 +75,21 @@ router.get('/cartplus', (req,res) =>{
           if(err) throw new Error(err);
           let menubar = cart_plus_view.menubar()
           let html = cart_plus_view.HTML(menubar)
-          res.end(html)
+          res.redirect(`cart?user_id=${user_id}`)
       });
    } catch(err) {
       res.redirect('/')
    }
 });
 
-router.get('/cartremove', (req,res) =>{
+router.get('/cartminus', (req,res) =>{
    const {user_id, company_id, game_name} = url.parse(req.url,true).query;
    try{
       db.query(`Delete From cart Where cart.user_id = ? and cart.company_id = ? and cart.game_name = ?`, [user_id, company_id, game_name], (err)=>{
           if(err) throw new Error(err);
           let menubar = cart_remove_view.menubar()
           let html = cart_remove_view.HTML(menubar)
-          res.end(html)
+          res.redirect(`cart?user_id=${user_id}`)
       });
    } catch(err) {
       res.redirect('/')
@@ -100,7 +100,8 @@ router.get('/shop_category', (req,res) =>{
    const {category} = url.parse(req.url,true).query;
    console.log(category);
    try{
-      db.query(`SELECT * FROM game WHERE game.name IN (select category.game_name From category where category.category = ?) and approval = 1`, [category], (err, game)=>{
+      db.query(`SELECT * FROM game as g LEFT JOIN regist as r ON g.company_id = r.company_id AND g.name = r.game_name WHERE g.name IN (select category.game_name From category where category.category = ?) AND r.approval = true`,
+       [category], (err, game)=>{
           if(err) throw new Error(err);
           let game_list = shop_category_view.game_list(game)
           let category_set = shop_category_view.category_set(category)

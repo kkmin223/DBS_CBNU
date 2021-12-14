@@ -113,6 +113,7 @@ exports.HTML = (user_list,company_list,game_list,user_summary, game_summary) =>{
                                     <table class="table table-responsive">
                                         <thead>
                                             <tr>
+                                                <th></th>    
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Password</th>

@@ -53,6 +53,9 @@ router.post('/regist_game', upload.single('game_img'),(req,res)=> {
                     if(err) throw new Error(err);
                 });
         });
+        db.query(`INSERT INTO regist (company_id, game_name, manager_id) VALUES (?,?,?)`,[store.get('key').id, data.name, "m_id"],(err)=>{
+            if(err) throw new Error(err);
+        })
         res.redirect('manage_game');
     } catch(err){
         res.writeHead(404);
@@ -65,9 +68,11 @@ router.post('/regist_game', upload.single('game_img'),(req,res)=> {
 
  router.get('/manage_game', (req,res)=>{
      try{
-        db.query(`SELECT * FROM game WHERE company_id = ? AND approval='1'`, [store.get('key').id],(err, approve_games)=>{
+        db.query(`SELECT * FROM game as g LEFT JOIN regist as r ON g.company_id = r.company_id AND g.name = r.game_name WHERE r.approval = true AND g.company_id=?`, 
+        [store.get('key').id],(err, approve_games)=>{
             if(err) throw new Error(err);
-            db.query(`SELECT * FROM game WHERE company_id = ? AND approval='0'`, [store.get('key').id],(err, unapprove_games)=>{
+            db.query(`SELECT * FROM game as g LEFT JOIN regist as r ON g.company_id = r.company_id AND g.name = r.game_name WHERE r.approval = false AND g.company_id=?`,
+             [store.get('key').id],(err, unapprove_games)=>{
                 if(err) throw new Error(err);
                 console.log(store.get('key').id)
                 let approved_game_list = manage_game_view.approved_game_list(approve_games)
@@ -109,10 +114,11 @@ router.get('/modify_game', (req,res)=>{
 router.post('/update_game', (req,res)=>{
     let data = req.body;
     try{
-        db.query(`UPDATE game SET name=?, release_date=?, price=?, description=?, system_requirements=?, rating=?, approval='0' WHERE company_id = ? AND name=?`
+        db.query(`UPDATE game SET name=?, release_date=?, price=?, description=?, system_requirements=?, rating=? WHERE company_id = ? AND name=?`
         ,[data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating,store.get('key').id,data.name]
         ,(err)=>{
             if(err) throw new Error(err);
+            db.query(`UPDATE regist SET approval='0' WHERE company_id=? AND game_name=?`,[store.get('key').id, data.name]);
             db.query(`DELETE FROM category WHERE company_id=? AND game_name=?`,[store.get('key').id, data.name]);
             db.query(`DELETE FROM language WHERE company_id=? AND game_name=?`,[store.get('key').id, data.name]);
             data.category.forEach(element => {
@@ -139,11 +145,12 @@ router.post('/update_game', (req,res)=>{
 
 router.get('/manager', (req,res)=>{
     try{
-        db.query(`SELECT * FROM user`, (err,users)=>{
+        db.query(`SELECT id,name, password, DATE_FORMAT(birthdate, '%y-%m-%d') as birthdate, email, phone, city, ku, dong FROM user`, (err,users)=>{
             if(err) throw new Error(err);
             db.query(`SELECT * FROM company`, (err,companys)=>{
                 if(err) throw new Error(err);
-                db.query(`SELECT * FROM game WHERE approval = false`,(err, games)=>{
+                db.query(`SELECT * FROM game as g LEFT JOIN regist as r ON g.company_id = r.company_id AND g.name = r.game_name WHERE r.approval = false`,
+                (err, games)=>{
                     if(err) throw new Error(err);
                     let user_list = manager_view.user_list(users);
                     let company_list = manager_view.company_list(companys);
@@ -190,7 +197,7 @@ router.get('/company/del', (req,res)=>{
 router.post('/approve_game', (req,res)=>{
     const {company_id, name} = req.body;
     try{
-        db.query(`UPDATE game SET approval = true WHERE company_id = ? AND name = ?`,[company_id, name], (err)=>{
+        db.query(`UPDATE regist SET approval = true WHERE company_id = ? AND game_name = ?`,[company_id, name], (err)=>{
             if(err) throw new Error(err);
             res.redirect('/manager');
         })
