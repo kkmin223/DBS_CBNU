@@ -34,10 +34,10 @@ exports.HTML = (game_detail, menubar) => {
             <div class="row">
                 <div class="col-12">
                     <div class="search-content">
-                        <form action="#" method="get">
-                            <input type="search" name="search" id="search" placeholder="Type your keyword...">
-                            <button type="submit"><img src="img/core-img/search.png" alt=""></button>
-                        </form>
+                    <form action="/shop_search" method="get">
+                    <input type="search" name="search" id="search" placeholder="Type your keyword...">
+                    <button type="submit"><img src="img/core-img/search.png" alt=""></button>
+                </form>
                     </div>
                 </div>
             </div>
@@ -278,7 +278,7 @@ exports.add_to_cart = (game) => {
     {
         result += `
         <form class="cart clearfix">
-            <a href="/cartplus?user_id=${store.get('key').id}&company_id=${game[0].company_id}&game_name=${game[0].name}&amount=${game[0].price}" class="btn amado-btn">Add to cart</a>
+            <a href="/cartplus?user_id=${store.get('key').id}&company_id=${game[0].company_id}&game_name=${game[0].name}&price=${game[0].price}" class="btn amado-btn">Add to cart</a>
         </form>
         `
     }
