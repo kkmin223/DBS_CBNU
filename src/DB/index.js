@@ -9,6 +9,7 @@ let connection = mysql.createConnection({
     user     : 'root',
     password : '7233',      //각자 비밀번호 사용
     database : 'dbs_project',
+
   });
 
   connection.connect();
