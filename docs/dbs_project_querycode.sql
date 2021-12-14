@@ -157,3 +157,6 @@ ADD CONSTRAINT `FK_Game_Company`
   REFERENCES `dbs_project`.`company` (`id`)
   ON DELETE CASCADE
   ON UPDATE CASCADE;
+
+alter table gameorder change amount price int;
+alter table cart change amount price int;
