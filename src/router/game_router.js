@@ -109,7 +109,7 @@ router.get('/modify_game', (req,res)=>{
 router.post('/update_game', (req,res)=>{
     let data = req.body;
     try{
-        db.query(`UPDATE game SET name=?, release_date=?, price=?, description=?, system_requirements=?, rating=? WHERE company_id = ? AND name=?`
+        db.query(`UPDATE game SET name=?, release_date=?, price=?, description=?, system_requirements=?, rating=?, approval='0' WHERE company_id = ? AND name=?`
         ,[data.name, data.release_date, data.price, data.description, data.system_requirements, data.rating,store.get('key').id,data.name]
         ,(err)=>{
             if(err) throw new Error(err);

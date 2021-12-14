@@ -17,7 +17,7 @@ const store = require('store');
 
 router.get('/', (req,res)=>{
    try{
-      db.query(`SELECT * FROM game where approval = 1`,(err, games)=>{
+      db.query(`SELECT * FROM game where approval='1'`,(err, games)=>{
           if(err) throw new Error(err);
           let game_list = index_view.game_list(games)
           let menubar = index_view.menubar()
@@ -28,16 +28,11 @@ router.get('/', (req,res)=>{
   }
 });
 
-router.post('/', (req,res) =>{
-   const search = req.body;
-   res.redirect('/shop_search?search=' + search.search);
-});
-
 
 
 router.get('/shop', (req,res) =>{
    try{
-      db.query(`SELECT * FROM game where approval = 1;`, (err, game)=>{
+      db.query(`SELECT * FROM game;`, (err, game)=>{
           if(err) throw new Error(err);
           let game_list = shop_view.game_list(game)
           let menubar = shop_view.menubar()
@@ -56,8 +51,9 @@ router.post('/shop', (req,res) =>{
 router.get('/shop_search', (req,res) =>{
    const search = url.parse(req.url,true).query;
    var query = "%" + search.search + "%"
+   console.log(query)
    try{
-      db.query(`select * from game where name like ? and game.approval = 1`, [query], (err, game)=>{
+      db.query(`select * from game where name like ?`, [query], (err, game)=>{
           if(err) throw new Error(err);
           let game_list = shop_search_view.game_list(game)
           let menubar = shop_search_view.menubar()
@@ -69,9 +65,9 @@ router.get('/shop_search', (req,res) =>{
 });
 
 router.get('/cartplus', (req,res) =>{
-   const {user_id, company_id, game_name, price} = url.parse(req.url,true).query;
+   const {user_id, company_id, game_name, amount} = url.parse(req.url,true).query;
    try{
-      db.query(`INSERT INTO cart (user_id, company_id, game_name, price) VALUES (?,?,?,?)`, [user_id, company_id, game_name, price], (err)=>{
+      db.query(`INSERT INTO cart (user_id, company_id, game_name, amount) VALUES (?,?,?,?)`, [user_id, company_id, game_name, amount], (err)=>{
           if(err) throw new Error(err);
           let menubar = cart_plus_view.menubar()
           let html = cart_plus_view.HTML(menubar)
@@ -100,7 +96,7 @@ router.get('/shop_category', (req,res) =>{
    const {category} = url.parse(req.url,true).query;
    console.log(category);
    try{
-      db.query(`SELECT * FROM game WHERE game.name IN (select category.game_name From category where category.category = ?) and approval = 1`, [category], (err, game)=>{
+      db.query(`SELECT * FROM game WHERE game.name IN (select category.game_name From category where category.category = ?)`, [category], (err, game)=>{
           if(err) throw new Error(err);
           let game_list = shop_category_view.game_list(game)
           let category_set = shop_category_view.category_set(category)
@@ -122,7 +118,7 @@ router.get('/cartpurchase', (req,res) =>{
             db.query(`Select * From cart Where cart.user_id = ?`, [user_id], (err, games)=>{
                if(err) throw new Error(err);
                for(let i=0; i<number.length; i++){
-                  db.query(`INSERT INTO gameorder (user_id, company_id, game_name, email, price) VALUES (?,?,?,?,?)`, [games[i].user_id, games[i].company_id, games[i].game_name, email, games[i].price], (err)=>{
+                  db.query(`INSERT INTO gameorder (user_id, company_id, game_name, email, amount) VALUES (?,?,?,?,?)`, [games[i].user_id, games[i].company_id, games[i].game_name, email, games[i].amount], (err)=>{
                      if(err) throw new Error(err);
                   });
                }
@@ -152,9 +148,8 @@ router.get('/user_game_detail', (req,res)=>{
                    let category = user_game_detail_view.category(categories)
                    let language = user_game_detail_view.language(languages);
                    let add_to_cart = user_game_detail_view.add_to_cart(game);
-                   let menubar = user_game_detail_view.menubar()
                    let game_detail = user_game_detail_view.game_detail(game,category,language,add_to_cart)
-                   let html = user_game_detail_view.HTML(game_detail,menubar);
+                   let html = user_game_detail_view.HTML(game_detail);
                    res.end(html)
                })
            })
