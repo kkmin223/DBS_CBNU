@@ -164,8 +164,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 }
 
 exports.show_info = (info,date) => {
-    let show_info = 
-    `<div class="login_details_area mt-50 clearfix">
+    let show_info = "";
+    
+
+            if(store.get('key').type=='user'){
+                show_info += 
+                `<div class="login_details_area mt-50 clearfix">
     <div class="login-title">
         <h2>My Page</h2>
     </div>
@@ -184,10 +188,8 @@ exports.show_info = (info,date) => {
             <div class="col-12 mb-3">
                 <label>Name</label>
                 <input type="text" class="form-control" name="name" id="name" value="${info[0].name}"  readonly>
-            </div>`
-
-            if(store.get('key').type=='user'){
-                show_info += `<div class="col-12 mb-3">
+            </div> 
+                <div class="col-12 mb-3">
                     <label>Birthdate</label>
                     <input type="text" class="form-control" name="birthdate" id="birthdate" value="${date[0].simple_date}"  readonly>
                 </div>
@@ -201,7 +203,28 @@ exports.show_info = (info,date) => {
                 </div>
                 `}
             else{
-                show_info +=`<div class="col-md-6 mb-3">
+                show_info +=
+                `<div class="login_details_area mt-50 clearfix">
+    <div class="login-title">
+        <h2>My Page</h2>
+    </div>
+    <div>
+        <h5>Welcom, ${info[0].name}!  <a href="/regist_game" class="btn btn-info" style=>Regist Game</a> <a href="/manage_game" class="btn btn-info" style=>Manage Game</a></h5>
+    </div>
+        <div class="row">
+            <div class="col-12 mb-3">
+            </br><label>ID</label>
+                <input type="text" class="form-control" name="id" id="id" value="${info[0].id}"  readonly>
+            </div>
+            <div class="col-12 mb-3">
+                <label>Password</label>
+                <input type="text" class="form-control" name="password" id="password" value="${info[0].password}"  readonly>
+            </div>
+            <div class="col-12 mb-3">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" id="name" value="${info[0].name}"  readonly>
+            </div>
+                <div class="col-md-6 mb-3">
                     <label>Hompage</label>
                     <input type="text" class="form-control" name="homepage" id="homepage" value="${info[0].homepage}"  readonly>
                 </div>
@@ -226,5 +249,5 @@ exports.show_info = (info,date) => {
         </div>
     </div> `
 
-return show_info
+    return show_info
 }

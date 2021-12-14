@@ -1,3 +1,5 @@
+const store = require('store')
+
 exports.HTML = (user_list,company_list,game_list,user_summary, game_summary) =>{
     return `
     <!DOCTYPE html>
@@ -72,7 +74,7 @@ exports.HTML = (user_list,company_list,game_list,user_summary, game_summary) =>{
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/shop">Shop</a></li>
-                            <li class="active"><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
+                            <li><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
                             <li><a href="/logout">Logout</a></li>
                             <li class="active"><a href="/mypage">My Page</a></li>
                         </ul>

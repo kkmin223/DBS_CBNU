@@ -141,7 +141,7 @@ router.get('/mypage', function(req,res){
         })
     }
     else {
-       
+       res.redirect('/manager')
     }
    
  

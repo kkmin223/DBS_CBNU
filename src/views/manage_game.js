@@ -1,4 +1,6 @@
-exports.HTML = (approved_game_list,unapproved_game_list, menubar,summary)=> {
+const store = require('store')
+
+exports.HTML = (approved_game_list,unapproved_game_list, summary,menubar)=> {
         return `
         <!DOCTYPE html>
         <html lang="en">
@@ -73,7 +75,7 @@ exports.HTML = (approved_game_list,unapproved_game_list, menubar,summary)=> {
                         <ul>
                             <li><a href="/">Home</a></li>
                             <li><a href="/shop">Shop</a></li>
-                            <li class="active"><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
+                            <li><a href="/cart?user_id=${store.get('key').id}">Cart</a></li>
                             <li><a href="/logout">Logout</a></li>
                             <li class="active"><a href="/mypage">My Page</a></li>
                         </ul>
@@ -102,7 +104,7 @@ exports.HTML = (approved_game_list,unapproved_game_list, menubar,summary)=> {
                         <div class="row">
                             <div class="col-12 col-lg-8">
                                 <div class="cart-title mt-50">
-                                    <h2>Approved Game List <a href="#" class="btn btn-info" style=>Mypage</a></h2>
+                                    <h2>Approved Game List <a href="/mypage" class="btn btn-info" style=>Mypage</a></h2>
                                 </div>
                                 <div class="cart-table clearfix">
                                     <table class="table table-responsive">
@@ -266,6 +268,8 @@ exports.unapproved_game_list = (games) => {
 exports.summary = (approve_games, unapprove_games,company_id) => {
     let approval = approve_games.length;
     let unapproval = unapprove_games.length;
+    console.log(`ID: ${company_id}`);
+    console.log(`game: ${unapproval}   ${approval}`);
     return `<ul class="summary-table">
     <li><span>Company:</span> <span>${company_id}</span></li>
     <li><span>Approval Count:</span> <span>${approval}</span></li>
