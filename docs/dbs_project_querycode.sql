@@ -72,7 +72,7 @@ create table Gameorder(	-- 6th
     order_no	int			Unsigned Auto_increment,
     email		varchar(45)	NOT NULL,
     price		int			NOT NULL,
-    CONSTRAINT PK_Gameorder PRIMARY KEY (user_id, company_id, game_name),
+    CONSTRAINT PK_Gameorder PRIMARY KEY (user_id, company_id, game_name, order_no),
 	CONSTRAINT FK_Gameorder_User FOREIGN KEY (user_id) REFERENCES User(id),
 	CONSTRAINT FK_Gameorder_Company FOREIGN KEY (company_id) REFERENCES Company(id),
 	CONSTRAINT FK_Gameorder_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name),
@@ -85,7 +85,7 @@ create table Cart(	-- 7th
     game_name	varchar(45)	NOT NULL,	-- foreign key (will combine to be PK)
     cart_no		int			Unsigned Auto_increment,
     price		int			NOT NULL,
-    CONSTRAINT PK_Cart PRIMARY KEY (user_id, company_id, game_name),
+    CONSTRAINT PK_Cart PRIMARY KEY (user_id, company_id, game_name, cart_no),
 	CONSTRAINT FK_Cart_User FOREIGN KEY (user_id) REFERENCES User(id),
 	CONSTRAINT FK_Cart_Company FOREIGN KEY (company_id) REFERENCES Company(id),
 	CONSTRAINT FK_Cart_Game FOREIGN KEY (company_id, game_name) REFERENCES Game(company_id, name),
