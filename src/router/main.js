@@ -57,7 +57,8 @@ router.get('/shop_search', (req,res) =>{
    const search = url.parse(req.url,true).query;
    var query = "%" + search.search + "%"
    try{
-      db.query(`select * from game where name like ? and game.approval = 1`, [query], (err, game)=>{
+      db.query(`SELECT * FROM game as g LEFT JOIN regist as r ON g.company_id = r.company_id AND g.name = r.game_name WHERE r.approval = true
+      AND g.name like ?`, [query], (err, game)=>{
           if(err) throw new Error(err);
           let game_list = shop_search_view.game_list(game)
           let menubar = shop_search_view.menubar()
