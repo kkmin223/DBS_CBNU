@@ -30,8 +30,12 @@
 10.게임 승인화면(관리자 입장)<br>
 11.유저(개인/업체) 관리화면(관리자입장)
 
-## ER Diagram
-![ER_Diagram](./docs/ER_Diagram.png)
+## 설계 문서
+### ER Diagram
+<img src="./docs/ER_Diagram.png" width="600" height="600">
+
+### Usecase Diagram
+<img src="./docs/Usecase_Diagram.png" width="600" height="600">
 
 ## Description 
 1. /DB : index.js에서 DB connection 설정 가능. 각자 비밀번호 입력하고 connection 오류 발생시 주석 참고
