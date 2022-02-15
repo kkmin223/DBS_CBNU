@@ -41,6 +41,11 @@ https://youtu.be/dMWfPHWsVrI
 ### Usecase Diagram
 <img src="./docs/Usecase_Diagram.png" width="600" height="600">
 
+### Web-Based Information Systems
+<img src="https://user-images.githubusercontent.com/41673190/154033853-1675318e-6382-4eb2-9c6f-181e3cdee311.png" width="1000">
+
+###
+
 ## Description 
 1. /DB : index.js에서 DB connection 설정 가능. 각자 비밀번호 입력하고 connection 오류 발생시 주석 참고
 2. /router : 각 페이지 루트 관리
