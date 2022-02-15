@@ -1,5 +1,16 @@
 # DatabaseSystem Final Projsct (CBNU)
-## 안녕
+## 프로젝트 소개
+2021년도 2학기 데이터베이스시스템 기말 프로젝트
+
+소프트웨어공학 시간에 작성한 문서 기반으로 개발한 게임 SW 판매 웹 사이트
+
+
+## 기술스택
+- HTML
+- CSS
+- JS
+- Node js
+- My SQL
 
 ## 역할 분담
 - 재현<br>
