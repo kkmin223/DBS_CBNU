@@ -30,6 +30,9 @@
 10.게임 승인화면(관리자 입장)<br>
 11.유저(개인/업체) 관리화면(관리자입장)
 
+## ER Diagram
+![ER_Diagram](./docs/ER_Diagram.png)
+
 ## Description 
 1. /DB : index.js에서 DB connection 설정 가능. 각자 비밀번호 입력하고 connection 오류 발생시 주석 참고
 2. /router : 각 페이지 루트 관리
